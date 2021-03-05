@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Voivodeship } from "../../assets/voivodeship";
 import { Voivodeships } from "../../assets/voivodeships";
 import { ActivatedRoute } from '@angular/router';
+import { VoivodeshipService } from "../voivodeship.service";
 
 @Component({
   selector: 'app-voivodeship',
@@ -12,13 +13,11 @@ export class VoivodeshipComponent implements OnInit {
   voivodeship!: Voivodeship;
 
   constructor(
-    private route: ActivatedRoute,
-  ) {
-   }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    //this.voivodeship = 
+    const voivodeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.voivodeship = Voivodeships.find(voivodeship => voivodeship.id === voivodeId)!;
   }
-  
-
 }
