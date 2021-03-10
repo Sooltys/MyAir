@@ -1,0 +1,10 @@
+{
+    "/api": {
+      "target": "http://api.gios.gov.pl/pjp-api/rest",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+}

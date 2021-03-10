@@ -4,3 +4,9 @@
 <br>
 <h2>{{voivodeship.name | uppercase}}</h2>
 
+
+<div *ngFor="let station of array">
+  <div *ngIf="station.city.commune.provinceName == (voivodeship.name | uppercase)">
+      {{ station.stationName }}
+  </div>
+</div>  

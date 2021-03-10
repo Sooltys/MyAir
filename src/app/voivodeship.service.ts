@@ -11,7 +11,7 @@ import { DataAPI } from "../assets/dataAPI";
 })
 export class VoivodeshipService {
 
-  private urlAPI:string = 'http://api.gios.gov.pl/pjp-api/rest/';
+  private urlAPI:string = '/api';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -25,6 +25,6 @@ export class VoivodeshipService {
   }
 
   getStations(): Observable<StationsAPI[]> {
-    return this.http.get<StationsAPI[]>(`${this.urlAPI}station/findAll`);
+    return this.http.get<StationsAPI[]>(`${this.urlAPI}/station/findAll`);
   }
 }
