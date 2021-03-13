@@ -1,31 +1,45 @@
-<button routerLink="" mat-mini-fab color="accent" style="margin:15px;" aria-label="home icon">
+<button routerLink="" mat-mini-fab color="accent" aria-label="home icon">
     <mat-icon>home</mat-icon>
   </button>
 <br>
 <h2>{{voivodeship.name | uppercase}}</h2>
 
-<div *ngIf="dataFromSensor" style="background-color:dodgerblue;">
-  <p>
-    <b>Najnowszy wynik</b> {{dataFromSensor.key}}
-    <br><b>Data: </b> {{dataFromSensor.values[0].date}}
-    <br><b>Wartość: </b> {{dataFromSensor.values[0].value}}
-  </p>
+<div *ngIf="isStationView" 
+class="stations" 
+fxLayout="column" 
+fxLayoutAlign="space-evenly center" >
+  <div *ngFor="let station of stations" 
+  (click)="getSensors(station.id); isStationView=false; activeCity=station.city.name+', '+station.addressStreet " >
+    <p *ngIf="station.city.commune.provinceName == (voivodeship.name | uppercase)">
+        <b>{{ station.city.name }}</b>
+        <br> {{ station.addressStreet }}
+        <br><i>ID: {{ station.id }}</i>
+    </p>
+  </div> 
 </div>
 
-<div *ngIf="sensors" >
-  <div *ngFor="let sensor of sensors" style="margin-top: 20px; background-color: aqua;">
-    <p (click)="getData(sensor.id)" >
-      <b>ID:</b> {{ sensor.id }}
-      <br><b>Nazwa parametru:</b> {{ sensor.param.paramName }}
-      <br><b>Skrót:</b> {{ sensor.param.paramCode }}
-    </p>
+<div *ngIf="sensors && !isStationView" 
+class="sensors">
+  <button (click)="isStationView=true;" mat-raised-button color="accent">Powrót</button>
+  <h2>{{activeCity | uppercase}}</h2>
+  <div fxLayout="column" 
+  fxLayoutAlign="space-evenly center">
+    <div *ngFor="let sensor of sensors" 
+    (click)="getData(sensor.id);">
+      <p [title]=sensor.param.paramName>
+        <br><b *ngIf="sensor.param.paramName.length<=10">{{ sensor.param.paramName }} </b>
+        <b *ngIf="sensor.param.paramName.length>10"> {{ sensor.param.paramCode }} </b>
+      </p>
+    </div>
   </div>
 </div>
 
-<div *ngFor="let station of stations" style="background-color: aquamarine;">
-  <p (click)="getSensors(station.id)" *ngIf="station.city.commune.provinceName == (voivodeship.name | uppercase)">
-      <b>ID:</b> {{ station.id }}
-      <br><b>Nazwa:</b> {{ station.stationName }}
-      <br><b>Miasto:</b> {{ station.city.name }}
+<div *ngIf="dataFromSensor && !isStationView" 
+class="data"
+fxLayout="row" 
+fxLayoutAlign="center center">
+  <p>
+    {{dataFromSensor.values[0].date}}
+    <br><b>{{dataFromSensor.values[0].value}}  [µg/m3]</b>
   </p>
-</div>  
+</div>

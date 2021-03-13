@@ -18,6 +18,8 @@ export class VoivodeshipComponent implements OnInit {
   stations!: StationsAPI[];
   sensors!: SensorsAPI[];
   dataFromSensor!: DataAPI;
+  isStationView: boolean = true;
+  activeCity!: string;
 
   constructor(
     private route: ActivatedRoute,

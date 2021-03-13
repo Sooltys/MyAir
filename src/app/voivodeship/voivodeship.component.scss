@@ -1,4 +1,31 @@
 p{
+    font-size: 15px;
+}
+button {
     margin: 15px;
-    font-size: 20px;
+}
+.stations {
+    text-align: center;
+}
+.stations p {
+    padding: 5px;
+    background-color: rgba(127, 255, 212, 0.616); 
+    width:  200px; 
+    border-radius: 10px;
+}
+.sensors p {
+    background-color: rgba(0, 255, 255, 0.726);
+    width:  100px;
+    height: 65px;
+    border-radius: 20px;
+    text-align: center;
+}
+.sensors h2 {
+    margin: 20px;
+}
+.data p{
+    background-color:rgba(33, 240, 43, 0.753);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
 }
