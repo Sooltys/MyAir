@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { VoivodeshipService } from "../voivodeship.service";
-import { VoivodeshipComponent } from '../voivodeship/voivodeship.component';
-
+import { DeviceDetectorService } from "ngx-device-detector";
+import { Coordinates } from "../../assets/coordinates";
+import { Coordinate } from 'src/assets/coordinate';
+import { Voivodeships } from "../../assets/voivodeships";
+import { Voivodeship } from 'src/assets/voivodeship';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +13,21 @@ import { VoivodeshipComponent } from '../voivodeship/voivodeship.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(
-    private voivodeService: VoivodeshipService
-    ) { }
+  coordinates: Coordinate;
+  voivodeships: Voivodeship[] = Voivodeships;
 
-  ngOnInit(): void { }
+  constructor(
+    private deviceService: DeviceDetectorService
+  ) { 
+      this.coordinates = Coordinates[(this.isMobile()? 1 : 0)];
+   }
+
+  ngOnInit(): void { 
+  
+  }
+
+  isMobile(): boolean {
+    return this.deviceService.isMobile();
+  }
 
 }
