@@ -13,15 +13,15 @@ export class HeaderComponent implements OnInit {
   activeVoivodeship!: string;
 
   constructor( ) { 
-  }
-
-  ngOnInit(): void {
     this.activeVoivodeship = "Województwa";
   }
 
-  changeActiveVoivodeship(newActive: string): void {
-    this.activeVoivodeship = newActive;
-    console.log("chenging active voivode");
-    console.log("active voivode: "+this.activeVoivodeship);
+  ngOnInit(): void {
   }
+
+  //changeActiveVoivodeship(newActive: string): void {
+    //this.activeVoivodeship = newActive;
+    //console.log("chenging active voivode");
+    //console.log("active voivode: "+this.activeVoivodeship);
+  //}
 }
