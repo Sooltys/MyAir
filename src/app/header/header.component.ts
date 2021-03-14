@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck, Output } from '@angular/core';
+import { Voivodeship } from 'src/assets/voivodeship';
+import { Voivodeships } from "../../assets/voivodeships";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  voivodeships: Voivodeship[] = Voivodeships;
+  activeVoivodeship!: string;
 
-  ngOnInit(): void {
+  constructor( ) { 
   }
 
+  ngOnInit(): void {
+    this.activeVoivodeship = "Województwa";
+  }
+
+  changeActiveVoivodeship(newActive: string): void {
+    this.activeVoivodeship = newActive;
+    console.log("chenging active voivode");
+    console.log("active voivode: "+this.activeVoivodeship);
+  }
 }

@@ -2,9 +2,12 @@
     <img src="../../assets/favicon.png" alt="icon" width="32px" height="32px"/>
     <span id="title" >My Air</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
+    <button mat-raised-button [matMenuTriggerFor]="menu" >{{ activeVoivodeship }}</button>
+    <mat-menu #menu="matMenu">
+        <div *ngFor="let voivodeship of voivodeships ">
+            <button routerLink="/wojewodztwo/{{voivodeship.id}}" mat-menu-item>{{ voivodeship.name }}</button>
+        </div>
+    </mat-menu>
     <a  href="http://jakubpuzyna.pl" target="_blank">
         <button mat-raised-button color="accent">Autor</button>
     </a>

@@ -1,3 +1,6 @@
+h2 {
+    margin: 20px;
+}
 p{
     font-size: 15px;
 }
@@ -12,6 +15,7 @@ button {
     background-color: rgba(127, 255, 212, 0.616); 
     width:  200px; 
     border-radius: 10px;
+    cursor: pointer;
 }
 .sensors p {
     background-color: rgba(0, 255, 255, 0.726);
@@ -19,9 +23,7 @@ button {
     height: 65px;
     border-radius: 20px;
     text-align: center;
-}
-.sensors h2 {
-    margin: 20px;
+    cursor: pointer;
 }
 .data p{
     background-color:rgba(33, 240, 43, 0.753);

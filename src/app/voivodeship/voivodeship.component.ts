@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Voivodeship } from "../../assets/voivodeship";
 import { Voivodeships } from "../../assets/voivodeships";
+import { HeaderComponent } from "../header/header.component";
 import { ActivatedRoute } from '@angular/router';
 import { VoivodeshipService } from "../voivodeship.service";
 import { StationsAPI } from "../../assets/stationsAPI";
@@ -10,9 +11,12 @@ import { DataAPI } from "../../assets/dataAPI";
 @Component({
   selector: 'app-voivodeship',
   templateUrl: './voivodeship.component.html',
-  styleUrls: ['./voivodeship.component.scss']
+  styleUrls: ['./voivodeship.component.scss'],
+  providers: [HeaderComponent]
 })
 export class VoivodeshipComponent implements OnInit {
+  voivodeId!: number;
+  oldVoivodeId: number = -1;
   voivodeship!: Voivodeship;
 
   stations!: StationsAPI[];
@@ -23,14 +27,27 @@ export class VoivodeshipComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private voivodeService: VoivodeshipService
+    private voivodeService: VoivodeshipService,
+    private head: HeaderComponent
   ) { }
 
   ngOnInit(): void {
-    const voivodeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.voivodeship = Voivodeships.find(voivodeship => voivodeship.id === voivodeId)!;
+    this.voivodeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.voivodeship = Voivodeships.find(voivodeship => voivodeship.id === this.voivodeId)!;
+    if(!this.stations) {
+      this.getStations();
+    }
+    this.head.changeActiveVoivodeship(this.voivodeship.name)
+  }
 
-    this.getStations();
+  ngDoCheck(): void {
+    this.voivodeId = Number(this.route.snapshot.paramMap.get('id'));
+    if(this.voivodeId !== this.oldVoivodeId) {
+      this.voivodeship = Voivodeships.find(voivodeship => voivodeship.id === this.voivodeId)!;
+      this.oldVoivodeId = this.voivodeId;
+      this.isStationView = true;
+      this.head.changeActiveVoivodeship(this.voivodeship.name)
+    }
   }
 
   getStations(): void {
@@ -47,5 +64,4 @@ export class VoivodeshipComponent implements OnInit {
     this.voivodeService.getData(id)
       .subscribe(data => this.dataFromSensor = data);
   }
-
 }
