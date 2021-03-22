@@ -13,14 +13,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { VoivodeshipComponent } from './voivodeship/voivodeship.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { CitySearchComponent } from './city-search/city-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    VoivodeshipComponent
+    VoivodeshipComponent,
+    CitySearchComponent
   ],
   imports: [
     BrowserModule,

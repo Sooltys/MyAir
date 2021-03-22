@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Voivodeship } from 'src/assets/voivodeship';
 import { Voivodeships } from "../../assets/voivodeships";
 
@@ -19,9 +19,4 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //changeActiveVoivodeship(newActive: string): void {
-    //this.activeVoivodeship = newActive;
-    //console.log("chenging active voivode");
-    //console.log("active voivode: "+this.activeVoivodeship);
-  //}
 }

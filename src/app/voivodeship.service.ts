@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { StationsAPI } from "../assets/stationsAPI";
 import { SensorsAPI } from "../assets/sensorsAPI";
 import { DataAPI } from "../assets/dataAPI";
+import { Voivodeship } from 'src/assets/voivodeship';
 
 
 @Injectable({
@@ -26,14 +27,14 @@ export class VoivodeshipService {
   getStations(): Observable<StationsAPI[]> {
     return this.http.get<StationsAPI[]>(`${this.urlAPI}/station/findAll`)
       .pipe(
-        tap(_ => console.log('loaded Stations')),
-        catchError(this.handleError<StationsAPI[]>('getStations', []))
+      tap(_ => console.log('loaded Stations')),
+      catchError(this.handleError<StationsAPI[]>('getStations', []))
       );
   }
 
   getSensors(stationId: number): Observable<SensorsAPI[]> {
     return this.http.get<SensorsAPI[]>(`${this.urlAPI}/station/sensors/${stationId}`)
-    .pipe(
+      .pipe(
       tap(_ => console.log('loaded Sensors')),
       catchError(this.handleError<SensorsAPI[]>('getSensors', []))
     );
@@ -41,7 +42,7 @@ export class VoivodeshipService {
 
   getData(sensorId: number): Observable<DataAPI> {
     return this.http.get<DataAPI>(`${this.urlAPI}/data/getData/${sensorId}`)
-    .pipe(
+      .pipe(
       tap(_ => console.log('loaded data')),
       catchError(this.handleError<DataAPI>('getData'))
     );
@@ -61,4 +62,5 @@ export class VoivodeshipService {
       return of(result as T);
     };
   }
+
 }

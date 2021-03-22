@@ -27,8 +27,7 @@ export class VoivodeshipComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private voivodeService: VoivodeshipService,
-    private head: HeaderComponent
+    private voivodeService: VoivodeshipService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +36,6 @@ export class VoivodeshipComponent implements OnInit {
     if(!this.stations) {
       this.getStations();
     }
-    //this.head.changeActiveVoivodeship(this.voivodeship.name)
   }
 
   ngDoCheck(): void {
@@ -46,7 +44,6 @@ export class VoivodeshipComponent implements OnInit {
       this.voivodeship = Voivodeships.find(voivodeship => voivodeship.id === this.voivodeId)!;
       this.oldVoivodeId = this.voivodeId;
       this.isStationView = true;
-      //this.head.changeActiveVoivodeship(this.voivodeship.name)
     }
   }
 
