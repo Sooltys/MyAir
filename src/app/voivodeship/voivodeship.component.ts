@@ -24,6 +24,7 @@ export class VoivodeshipComponent implements OnInit {
   dataFromSensor!: DataAPI;
   isStationView: boolean = true;
   activeCity!: string;
+  dataFromAllSensor!: DataAPI[];
 
   constructor(
     private route: ActivatedRoute,
@@ -54,11 +55,19 @@ export class VoivodeshipComponent implements OnInit {
 
   getSensors(id: number): void {
     this.voivodeService.getSensors(id)
-      .subscribe(sensors => this.sensors = sensors);
+      .subscribe(sensors => {
+        this.sensors = sensors
+        for (let index = 0; index < sensors.length; index++) {
+          this.voivodeService.getData(sensors[index].id)
+            .subscribe(data => this.dataFromAllSensor[index] = data);
+        }
+      });
+    
   }
 
   getData(id: number): void {
     this.voivodeService.getData(id)
       .subscribe(data => this.dataFromSensor = data);
   }
+
 }
