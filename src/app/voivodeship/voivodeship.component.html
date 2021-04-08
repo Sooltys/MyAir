@@ -29,9 +29,10 @@ class="sensors">
         <br><b *ngIf="sensor.param.paramName.length<=10">{{ sensor.param.paramName }} </b>
         <b *ngIf="sensor.param.paramName.length>10"> {{ sensor.param.paramCode }} </b>
       </p>
-      <!--{{dataFromAllSensor[i].values[0].date}}
+
+      {{dataFromAllSensor[i].values[0].date}}
       <br><b>{{dataFromAllSensor[i].values[0].value}}  [µg/m3]</b>
-      -->
+      
     </div>
   </div>
 </div>
