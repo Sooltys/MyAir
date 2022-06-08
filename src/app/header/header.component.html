@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <img src="../../assets/favicon.png" alt="icon" width="32px" height="32px"/>
+    <img src="assets/favicon.png" alt="icon" width="32px" height="32px"/>
     <span id="title" >My Air</span>
     <span class="example-spacer"></span>
     <button mat-raised-button [matMenuTriggerFor]="menu" >{{ activeVoivodeship }}</button>
@@ -8,7 +8,7 @@
             <button routerLink="/wojewodztwo/{{voivodeship.id}}" mat-menu-item>{{ voivodeship.name }}</button>
         </div>
     </mat-menu>
-    <a  href="http://jakubpuzyna.pl" target="_blank">
+    <a  href="http://jakubp.pl" target="_blank">
         <button mat-raised-button color="accent">Autor</button>
     </a>
   </mat-toolbar>

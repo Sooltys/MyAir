@@ -20,20 +20,24 @@ fxLayoutAlign="space-evenly center" >
 
 <div *ngIf="sensors && !isStationView" 
 class="sensors">
-  <button (click)="isStationView=true;" mat-raised-button color="accent">Powrót</button>
+  <button (click)="isStationView=true; dataFromSensor = null!;" mat-raised-button color="accent">Powrót</button>
   <h2>{{activeCity | uppercase}}</h2>
   <div fxLayout="column" 
   fxLayoutAlign="space-evenly center">
-    <div *ngFor="let sensor of sensors" 
-    (click)="getData(sensor.id);">
+    <div *ngFor="let sensor of sensors; let i = index;">
       <p [title]=sensor.param.paramName>
         <br><b *ngIf="sensor.param.paramName.length<=10">{{ sensor.param.paramName }} </b>
         <b *ngIf="sensor.param.paramName.length>10"> {{ sensor.param.paramCode }} </b>
       </p>
+
+      {{dataFromAllSensor[i].values[0].date}}
+      <br><b>{{dataFromAllSensor[i].values[0].value}}  [µg/m3]</b>
+      
     </div>
   </div>
 </div>
 
+<!--
 <div *ngIf="dataFromSensor && !isStationView" 
 class="data"
 fxLayout="row" 
@@ -43,3 +47,4 @@ fxLayoutAlign="center center">
     <br><b>{{dataFromSensor.values[0].value}}  [µg/m3]</b>
   </p>
 </div>
+-->

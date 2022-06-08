@@ -2,7 +2,7 @@
 
 <app-city-search></app-city-search>
 
-<img src="../../assets/{{coordinates.device}}" usemap="#image-map" alt="mapa polskich wojewodztw">
+<img src="assets/{{coordinates.device}}" usemap="#image-map" alt="mapa polskich wojewodztw">
 <map name="image-map">
     <div *ngFor="let voivodeship of voivodeships">
         <area routerLink="/wojewodztwo/{{voivodeship.id}}" coords="{{coordinates.cords[voivodeship.id - 1]}}" alt="{{voivodeship.name}}" title="{{voivodeship.name}}" shape="poly">
