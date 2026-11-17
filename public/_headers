@@ -1,0 +1,27 @@
+# Cloudflare Pages: nagłówki dla plików statycznych.
+# Uwaga: nie dotyczą odpowiedzi z Pages Functions (/api/*) – te ustawia functions/api/[[path]].js.
+# Gdy kilka reguł pasuje do adresu, nagłówki się sumują (te same nazwy są łączone przecinkiem),
+# dlatego Cache-Control jest ustawiany tylko w regułach, które się nie nakładają.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+
+# index.html (także dla tras SPA, np. /wojewodztwo/5) – zawsze sprawdzaj nową wersję.
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+
+# JS i CSS z hashem w nazwie (outputHashing: all) – nie zmieniają się nigdy.
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Obrazki bez hasha w nazwie – krótszy cache.
+/*.jpg
+  Cache-Control: public, max-age=86400
+/*.png
+  Cache-Control: public, max-age=86400
