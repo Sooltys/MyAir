@@ -1,12 +1,14 @@
-<div fxLayout="column" fxLayoutAlign="space-evenly center">
-
-<app-city-search></app-city-search>
-
-<img src="assets/{{coordinates.device}}" usemap="#image-map" alt="mapa polskich wojewodztw">
-<map name="image-map">
-    <div *ngFor="let voivodeship of voivodeships">
-        <area routerLink="/wojewodztwo/{{voivodeship.id}}" coords="{{coordinates.cords[voivodeship.id - 1]}}" alt="{{voivodeship.name}}" title="{{voivodeship.name}}" shape="poly">
-    </div>
-</map>
-
+<div class="home">
+  <img [src]="map().image" usemap="#image-map" alt="Mapa województw Polski" />
+  <map name="image-map">
+    @for (voivodeship of voivodeships; track voivodeship.id) {
+      <area
+        shape="poly"
+        [routerLink]="['/wojewodztwo', voivodeship.id]"
+        [attr.coords]="map().cords[voivodeship.id - 1]"
+        [alt]="voivodeship.name"
+        [title]="voivodeship.name"
+      />
+    }
+  </map>
 </div>

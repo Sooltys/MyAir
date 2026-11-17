@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main {
+  flex: 1;
+}
+
+.source {
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}

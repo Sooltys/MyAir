@@ -1,50 +1,72 @@
-<button routerLink="" mat-mini-fab color="accent" aria-label="home icon">
-    <mat-icon>home</mat-icon>
-  </button>
-<br>
-<h2>{{voivodeship.name | uppercase}}</h2>
+<a matMiniFab color="accent" routerLink="/" aria-label="Strona główna">
+  <mat-icon>home</mat-icon>
+</a>
 
-<div *ngIf="isStationView" 
-class="stations" 
-fxLayout="column" 
-fxLayoutAlign="space-evenly center" >
-  <div *ngFor="let station of stations" 
-  (click)="getSensors(station.id); isStationView=false; activeCity=station.city.name+', '+station.addressStreet " >
-    <p *ngIf="station.city.commune.provinceName == (voivodeship.name | uppercase)">
-        <b>{{ station.city.name }}</b>
-        <br> {{ station.addressStreet }}
-        <br><i>ID: {{ station.id }}</i>
-    </p>
-  </div> 
-</div>
+@if (voivodeship(); as voivodeship) {
+  <h2>{{ voivodeship.name | uppercase }}</h2>
 
-<div *ngIf="sensors && !isStationView" 
-class="sensors">
-  <button (click)="isStationView=true; dataFromSensor = null!;" mat-raised-button color="accent">Powrót</button>
-  <h2>{{activeCity | uppercase}}</h2>
-  <div fxLayout="column" 
-  fxLayoutAlign="space-evenly center">
-    <div *ngFor="let sensor of sensors; let i = index;">
-      <p [title]=sensor.param.paramName>
-        <br><b *ngIf="sensor.param.paramName.length<=10">{{ sensor.param.paramName }} </b>
-        <b *ngIf="sensor.param.paramName.length>10"> {{ sensor.param.paramCode }} </b>
-      </p>
+  @if (selectedStation(); as station) {
+    <section class="sensors">
+      <button matButton="elevated" color="accent" type="button" (click)="backToStations()">
+        Powrót
+      </button>
+      <h2>{{ station.city | uppercase }}{{ station.street ? ', ' + (station.street | uppercase) : '' }}</h2>
 
-      {{dataFromAllSensor[i].values[0].date}}
-      <br><b>{{dataFromAllSensor[i].values[0].value}}  [µg/m3]</b>
-      
-    </div>
-  </div>
-</div>
-
-<!--
-<div *ngIf="dataFromSensor && !isStationView" 
-class="data"
-fxLayout="row" 
-fxLayoutAlign="center center">
-  <p>
-    {{dataFromSensor.values[0].date}}
-    <br><b>{{dataFromSensor.values[0].value}}  [µg/m3]</b>
-  </p>
-</div>
--->
+      @if (readings.error()) {
+        <div class="error" role="alert">
+          <p>Nie udało się pobrać danych z GIOŚ. Spróbuj ponownie za chwilę.</p>
+          <button matButton="elevated" type="button" (click)="readings.reload()">
+            Spróbuj ponownie
+          </button>
+        </div>
+      } @else if (readings.isLoading()) {
+        <p class="status">Ładowanie odczytów…</p>
+      } @else if (readings.hasValue()) {
+        <div class="sensor-list">
+          @for (item of readings.value(); track item.sensor.id) {
+            <div class="sensor" [title]="item.sensor.paramName">
+              <b>{{ paramLabel(item) }}</b>
+              @if (item.reading; as reading) {
+                <span class="value">{{ reading.value }} µg/m³</span>
+                <span class="date">{{ reading.date }}</span>
+              } @else if (item.failed) {
+                <span class="date">błąd pobierania</span>
+              } @else {
+                <span class="date">brak bieżących danych</span>
+              }
+            </div>
+          } @empty {
+            <p class="status">Ta stacja nie ma stanowisk pomiarowych.</p>
+          }
+        </div>
+      }
+    </section>
+  } @else {
+    @if (stations.error()) {
+      <div class="error" role="alert">
+        <p>Nie udało się pobrać listy stacji z GIOŚ. Spróbuj ponownie za chwilę.</p>
+        <button matButton="elevated" type="button" (click)="stations.reload()">
+          Spróbuj ponownie
+        </button>
+      </div>
+    } @else if (stations.isLoading()) {
+      <p class="status">Ładowanie stacji…</p>
+    } @else {
+      <div class="stations">
+        @for (station of voivodeshipStations(); track station.id) {
+          <button type="button" class="station" (click)="selectStation(station)">
+            <b>{{ station.city }}</b>
+            @if (station.street) {
+              <br />{{ station.street }}
+            }
+            <br /><i>ID: {{ station.id }}</i>
+          </button>
+        } @empty {
+          <p class="status">Brak stacji pomiarowych w tym województwie.</p>
+        }
+      </div>
+    }
+  }
+} @else {
+  <p class="status">Nie ma takiego województwa.</p>
+}
