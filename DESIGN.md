@@ -351,7 +351,7 @@ An SVG of the 16 voivodeships, generated from Natural Earth boundaries by `scrip
 - **Reduced motion:** every animation and transition collapses to 0.01ms.
 
 ### Icons
-Authored line icons on a 24×24 grid with a 1.75 stroke and round caps and joins, drawn in currentColor at 20px by default. The set: search, chevrons, close, refresh, external, check, alert, info, minus. They are always `aria-hidden`, and a text label carries the meaning.
+Authored line icons on a 24×24 grid with a 1.75 stroke and round caps and joins, drawn in currentColor at 20px by default. The set: search, chevrons, close, refresh, external, check, alert, info, minus, and one filled heart, which appears only in the footer credit, in the accent colour. They are always `aria-hidden`, and a text label carries the meaning.
 
 ## Do's and Don'ts
 

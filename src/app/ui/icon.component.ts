@@ -10,7 +10,8 @@ export type IconName =
   | 'check'
   | 'alert'
   | 'info'
-  | 'minus';
+  | 'minus'
+  | 'heart';
 
 /** Ikony liniowe 24×24, obrys 1.75, w kolorze tekstu. Zawsze dekoracyjne (aria-hidden). */
 @Component({
@@ -68,6 +69,12 @@ export type IconName =
         }
         @case ('minus') {
           <path d="M6.5 12h11" />
+        }
+        @case ('heart') {
+          <path
+            fill="currentColor"
+            d="M12 20s-7.5-4.4-7.5-10a4.2 4.2 0 0 1 7.5-2.6A4.2 4.2 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z"
+          />
         }
       }
     </svg>
