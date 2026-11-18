@@ -7,6 +7,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
 
 # index.html (także dla tras SPA, np. /wojewodztwo/5) – zawsze sprawdzaj nową wersję.
 /

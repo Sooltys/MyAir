@@ -8,9 +8,13 @@ main {
   flex: 1;
 }
 
-.source {
+footer {
   padding: 16px;
   text-align: center;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
+
+  p {
+    margin: 4px 0;
+  }
 }

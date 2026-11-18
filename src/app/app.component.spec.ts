@@ -22,4 +22,11 @@ describe('AppComponent', () => {
     const footer = (fixture.nativeElement as HTMLElement).querySelector('footer');
     expect(footer?.textContent).toContain('Główny Inspektorat Ochrony Środowiska');
   });
+
+  it('should link back to the portfolio', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    await fixture.whenStable();
+    const footer = (fixture.nativeElement as HTMLElement).querySelector('footer');
+    expect(footer?.querySelector('a[href="https://puzyna.pl"]')).toBeTruthy();
+  });
 });

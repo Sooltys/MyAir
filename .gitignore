@@ -31,7 +31,9 @@ yarn-error.log
 
 # Miscellaneous
 /.wrangler
-.dev.vars
+.dev.vars*
+.env
+.env.*
 /.angular/cache
 .sass-cache/
 /connect.lock
