@@ -1,14 +1,54 @@
-<div class="home">
-  <img [src]="map().image" usemap="#image-map" alt="Mapa województw Polski" />
-  <map name="image-map">
-    @for (voivodeship of voivodeships; track voivodeship.id) {
-      <area
-        shape="poly"
-        [routerLink]="['/wojewodztwo', voivodeship.id]"
-        [attr.coords]="map().cords[voivodeship.id - 1]"
-        [alt]="voivodeship.name"
-        [title]="voivodeship.name"
-      />
+<section class="intro">
+  <h1>Jakość powietrza w Polsce</h1>
+  <p class="lead">
+    Bieżące pomiary
+    @if (total(); as total) {
+      z <span class="num">{{ total }}</span> stacji GIOŚ,
+    } @else {
+      ze stacji GIOŚ,
     }
-  </map>
+    aktualizowane co godzinę. Wybierz województwo na mapie albo wyszukaj stację.
+  </p>
+</section>
+
+<div class="layout">
+  <div class="map card">
+    <svg [attr.viewBox]="viewBox" role="group" aria-labelledby="map-title">
+      <title id="map-title">Mapa województw Polski</title>
+      @for (region of regions; track region.id) {
+        <a
+          class="region"
+          [routerLink]="['/wojewodztwo', region.id]"
+          [attr.aria-label]="region.name"
+        >
+          <path [attr.d]="region.d" />
+          <text [attr.x]="region.x" [attr.y]="region.y" text-anchor="middle" aria-hidden="true">
+            @for (line of region.lines; track $index) {
+              <tspan
+                [attr.x]="region.x"
+                [attr.dy]="$first ? (region.lines.length > 1 ? '-0.2em' : '0.35em') : '1.1em'"
+              >
+                {{ line }}
+              </tspan>
+            }
+          </text>
+        </a>
+      }
+    </svg>
+  </div>
+
+  <nav class="list card" aria-labelledby="list-title">
+    <h2 id="list-title">Województwa</h2>
+    <ul class="plain">
+      @for (voivodeship of sorted; track voivodeship.id) {
+        <li>
+          <a [routerLink]="['/wojewodztwo', voivodeship.id]">
+            <span class="name">{{ voivodeship.name }}</span>
+            <span class="count num">{{ countLabel(voivodeship) }}</span>
+            <app-icon name="chevron-right" [size]="16" />
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
 </div>

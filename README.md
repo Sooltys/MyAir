@@ -1,9 +1,9 @@
 # MyAir
 
-Bieżąca jakość powietrza ze stacji pomiarowych GIOŚ: mapa województw → lista stacji → najnowsze
-odczyty wszystkich stanowisk stacji.
+Bieżąca jakość powietrza ze stacji pomiarowych GIOŚ: mapa województw → lista stacji z indeksem GIOŚ →
+odczyty stacji z ostatniej doby i porównanie z normami WHO i UE.
 
-Angular 22 (standalone, zoneless, Angular Material), hosting na Cloudflare Pages.
+Angular 22 (standalone, zoneless, bez bibliotek UI), hosting na Cloudflare Pages.
 Źródło danych: [Główny Inspektorat Ochrony Środowiska](https://powietrze.gios.gov.pl), API v1.
 
 ## Wymagania

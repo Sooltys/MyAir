@@ -1,10 +1,155 @@
-.home {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+:host {
+  display: block;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 40px var(--gutter) 56px;
 }
 
-img {
-  margin-top: 20px;
+.intro {
+  max-width: 60ch;
+  margin-bottom: 28px;
+
+  h1 {
+    font-size: var(--t-3xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+.lead {
+  margin-top: 8px;
+  font-size: var(--t-lg);
+  color: var(--ink-2);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.map {
+  padding: 24px;
+
+  svg {
+    display: block;
+    width: 100%;
+    max-width: 709px;
+    height: auto;
+    // Cała mapa mieści się w pierwszym ekranie laptopa.
+    max-height: max(360px, calc(100dvh - 300px));
+    margin: 0 auto;
+    overflow: visible;
+  }
+}
+
+.region {
+  cursor: pointer;
+  outline: none;
+
+  path {
+    fill: #e1e7ee;
+    stroke: var(--surface);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    transition: fill 150ms ease-out;
+  }
+
+  text {
+    fill: var(--ink-2);
+    font-size: 15px;
+    font-weight: 600;
+    pointer-events: none;
+    transition: fill 150ms ease-out;
+  }
+
+  &:hover path {
+    fill: #c7dcf0;
+  }
+
+  &:hover text,
+  &:focus-visible text {
+    fill: var(--ink);
+  }
+
+  &:focus-visible path {
+    fill: #c7dcf0;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+  }
+}
+
+.list {
+  padding: 8px;
+
+  h2 {
+    padding: 12px 12px 8px;
+    font-size: var(--t-md);
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background-color 150ms ease-out;
+
+    &:hover {
+      background: var(--accent-soft);
+      color: var(--ink);
+    }
+  }
+
+  .count {
+    font-size: var(--t-xs);
+    color: var(--ink-3);
+  }
+
+  app-icon {
+    color: var(--ink-3);
+  }
+}
+
+@media (max-width: 959.98px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    column-gap: 8px;
+  }
+}
+
+@media (max-width: 719.98px) {
+  :host {
+    padding-top: 24px;
+  }
+
+  .intro h1 {
+    font-size: var(--t-2xl);
+  }
+
+  .lead {
+    font-size: var(--t-md);
+  }
+
+  .map {
+    padding: 12px 8px;
+  }
+
+  .region text {
+    font-size: 21px;
+  }
+
+  .region path {
+    stroke-width: 2;
+  }
 }

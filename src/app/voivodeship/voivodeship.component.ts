@@ -1,21 +1,20 @@
-import { UpperCasePipe } from '@angular/common';
-import { Component, computed, inject, input, linkedSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
-import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { Voivodeships } from '../data/voivodeships';
-import { SensorReading, Station } from '../models/air-quality';
+import { findVoivodeship, stationsIn } from '../data/voivodeships';
+import { AirIndex, IndexLevel, Station } from '../models/air-quality';
+import { IconComponent } from '../ui/icon.component';
+import { IndexBadgeComponent } from '../ui/index-badge.component';
 import { VoivodeshipService } from '../voivodeship.service';
 
-/** Krótkie nazwy wskaźników pokazujemy w całości, dłuższe zastępujemy kodem (np. „PM2.5”). */
-const MAX_PARAM_NAME_LENGTH = 10;
+type SortMode = 'az' | 'worst';
 
+/** Układ widoku województwa: lista stacji z indeksem GIOŚ i miejsce na podsumowanie lub stację. */
 @Component({
   selector: 'app-voivodeship',
-  imports: [RouterLink, UpperCasePipe, MatButtonModule, MatIconModule],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, IconComponent, IndexBadgeComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './voivodeship.component.html',
   styleUrl: './voivodeship.component.scss',
 })
@@ -25,9 +24,7 @@ export class VoivodeshipComponent {
   /** Parametr `:id` z trasy `wojewodztwo/:id`. */
   readonly id = input.required<string>();
 
-  protected readonly voivodeship = computed(() =>
-    Voivodeships.find((v) => v.id === Number(this.id())),
-  );
+  protected readonly voivodeship = computed(() => findVoivodeship(this.id()));
 
   protected readonly stations = rxResource({
     stream: () => this.service.getStations(),
@@ -35,51 +32,43 @@ export class VoivodeshipComponent {
 
   protected readonly voivodeshipStations = computed<Station[]>(() => {
     const voivodeship = this.voivodeship();
-    if (!voivodeship || !this.stations.hasValue()) {
-      return [];
+    return voivodeship && this.stations.hasValue()
+      ? stationsIn(voivodeship, this.stations.value())
+      : [];
+  });
+
+  protected readonly indexes = rxResource({
+    params: () => {
+      const ids = this.voivodeshipStations().map((s) => s.id);
+      return ids.length > 0 ? ids : undefined;
+    },
+    stream: ({ params: ids }) => this.service.getIndexes(ids),
+  });
+
+  protected readonly sort = signal<SortMode>('az');
+
+  protected readonly sortedStations = computed<Station[]>(() => {
+    const stations = this.voivodeshipStations();
+    if (this.sort() === 'az' || !this.indexes.hasValue()) {
+      return stations;
     }
-    const province = voivodeship.name.toUpperCase();
-    return this.stations
-      .value()
-      .filter((station) => station.province === province)
-      .sort((a, b) => a.city.localeCompare(b.city, 'pl') || a.name.localeCompare(b.name, 'pl'));
+    const rank = (station: Station) => {
+      const level = this.levelOf(station.id);
+      return typeof level === 'number' ? level : -1;
+    };
+    // Stabilne sortowanie: przy tym samym poziomie zostaje kolejność alfabetyczna.
+    return [...stations].sort((a, b) => rank(b) - rank(a));
   });
 
-  /** Wybrana stacja; zmiana województwa wraca do listy stacji. */
-  protected readonly selectedStation = linkedSignal<string, Station | null>({
-    source: this.id,
-    computation: () => null,
-  });
-
-  protected readonly readings = rxResource({
-    params: () => this.selectedStation()?.id,
-    stream: ({ params: stationId }) =>
-      this.service.getSensors(stationId).pipe(
-        switchMap((sensors) =>
-          sensors.length === 0
-            ? of<SensorReading[]>([])
-            : forkJoin(
-                sensors.map((sensor) =>
-                  this.service.getLatestReading(sensor.id).pipe(
-                    map((reading): SensorReading => ({ sensor, reading, failed: false })),
-                    catchError(() => of<SensorReading>({ sensor, reading: null, failed: true })),
-                  ),
-                ),
-              ),
-        ),
-      ),
-  });
-
-  protected selectStation(station: Station): void {
-    this.selectedStation.set(station);
-  }
-
-  protected backToStations(): void {
-    this.selectedStation.set(null);
-  }
-
-  protected paramLabel(item: SensorReading): string {
-    const { paramName, paramCode } = item.sensor;
-    return paramName.length <= MAX_PARAM_NAME_LENGTH ? paramName : paramCode;
+  /** `undefined` = wczytywanie, `null` = brak indeksu, `'error'` = nie udało się pobrać. */
+  protected levelOf(stationId: number): IndexLevel | null | 'error' | undefined {
+    if (this.indexes.error()) {
+      return 'error';
+    }
+    if (!this.indexes.hasValue()) {
+      return undefined;
+    }
+    const index: AirIndex | 'error' | undefined = this.indexes.value().get(stationId);
+    return index === undefined || index === 'error' ? 'error' : index.level;
   }
 }

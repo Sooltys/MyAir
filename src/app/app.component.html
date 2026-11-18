@@ -1,13 +1,23 @@
+<a class="skip-link" href="#main">Przejdź do treści</a>
 <app-header />
-<main>
+<main id="main" tabindex="-1">
   <router-outlet />
 </main>
 <footer>
-  <p>
-    Źródło danych:
-    <a href="https://powietrze.gios.gov.pl" target="_blank" rel="noopener">
-      Główny Inspektorat Ochrony Środowiska
-    </a>
-  </p>
-  <p><a href="https://puzyna.pl">← Wróć do portfolio (puzyna.pl)</a></p>
+  <div class="inner">
+    <p>
+      Źródło danych:
+      <a href="https://powietrze.gios.gov.pl" target="_blank" rel="noopener">
+        Główny Inspektorat Ochrony Środowiska</a
+      >
+      (pomiary godzinowe i Polski Indeks Jakości Powietrza). Normy: wytyczne WHO z 2021 r. i
+      dyrektywa UE 2008/50/WE.
+    </p>
+    <p>
+      <a href="https://puzyna.pl" class="back">
+        <app-icon name="chevron-left" [size]="16" />
+        Wróć do portfolio (puzyna.pl)
+      </a>
+    </p>
+  </div>
 </footer>

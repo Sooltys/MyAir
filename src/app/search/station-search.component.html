@@ -1,0 +1,52 @@
+<div class="field">
+  <app-icon name="search" [size]="18" class="lead" />
+  <label class="visually-hidden" for="station-search-input">Szukaj stacji pomiarowej</label>
+  <input
+    id="station-search-input"
+    type="search"
+    role="combobox"
+    autocomplete="off"
+    spellcheck="false"
+    placeholder="Szukaj miasta lub ulicy"
+    aria-autocomplete="list"
+    aria-controls="station-search-listbox"
+    [attr.aria-expanded]="expanded()"
+    [attr.aria-activedescendant]="active() >= 0 ? optionId(active()) : null"
+    [value]="query()"
+    (focus)="onFocus()"
+    (input)="onInput($any($event.target).value)"
+    (keydown)="onKeydown($event)"
+  />
+  @if (query()) {
+    <button type="button" class="clear" aria-label="Wyczyść wyszukiwanie" (click)="clear()">
+      <app-icon name="close" [size]="16" />
+    </button>
+  }
+</div>
+
+<div class="panel" [hidden]="!expanded()">
+  <ul id="station-search-listbox" role="listbox" aria-label="Stacje pomiarowe" class="plain">
+    @for (result of results(); track result.station.id; let i = $index) {
+      <li
+        role="option"
+        [id]="optionId(i)"
+        [attr.aria-selected]="i === active()"
+        [class.is-active]="i === active()"
+        (mousedown)="$event.preventDefault()"
+        (click)="go(result)"
+        (mousemove)="active.set(i)"
+      >
+        <span class="place">
+          <strong>{{ result.station.city }}</strong>
+          @if (result.station.street) {
+            <span>{{ result.station.street }}</span>
+          }
+        </span>
+        <span class="region">{{ result.voivodeshipName }}</span>
+      </li>
+    }
+  </ul>
+  @if (status(); as message) {
+    <p class="status" role="status">{{ message }}</p>
+  }
+</div>

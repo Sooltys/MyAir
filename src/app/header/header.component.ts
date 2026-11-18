@@ -1,17 +1,14 @@
-import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { Voivodeships } from '../data/voivodeships';
+import { StationSearchComponent } from '../search/station-search.component';
+import { IconComponent } from '../ui/icon.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MatToolbarModule, MatButtonModule, MatMenuModule],
+  imports: [RouterLink, RouterLinkActive, StationSearchComponent, IconComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
-  protected readonly voivodeships = Voivodeships;
-}
+export class HeaderComponent {}

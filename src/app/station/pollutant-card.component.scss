@@ -1,0 +1,213 @@
+:host {
+  display: block;
+}
+
+.pollutant {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+h3 {
+  display: grid;
+  gap: 2px;
+}
+
+.code {
+  font-size: var(--t-lg);
+  font-weight: 700;
+}
+
+.name {
+  font-size: var(--t-sm);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+.value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  .num {
+    font-size: var(--t-3xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+}
+
+.unit {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+}
+
+.time {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.chart {
+  margin: 16px 0 4px;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 64px;
+    border-radius: 4px;
+    cursor: crosshair;
+    touch-action: pan-y;
+
+    &:focus-visible {
+      outline-offset: 4px;
+    }
+  }
+
+  rect {
+    fill: var(--bar);
+    transition: fill 120ms ease-out;
+  }
+
+  .gap {
+    fill: var(--line);
+  }
+
+  .is-latest {
+    fill: var(--ink);
+  }
+
+  // Ostatnia godzina w kolorze indeksu cząstkowego GIOŚ (gdy GIOŚ liczył go z tej godziny).
+  svg[data-level] .is-latest {
+    fill: var(--lvl);
+    stroke: rgb(17 24 39 / 0.45);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  rect.is-active,
+  svg[data-level] rect.is-active {
+    fill: var(--accent);
+    stroke: none;
+  }
+
+  .mean {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+  }
+
+  figcaption {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: var(--t-xs);
+    color: var(--ink-3);
+  }
+
+  .readout {
+    text-align: center;
+    color: var(--accent-strong);
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--danger);
+}
+
+.norms {
+  display: grid;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+
+  li {
+    display: grid;
+    gap: 6px;
+    font-size: var(--t-sm);
+  }
+}
+
+.norm-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.norm-title {
+  color: var(--ink-2);
+}
+
+.norm-figure {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  app-icon {
+    align-self: center;
+  }
+}
+
+[data-status='above'] .norm-figure {
+  color: var(--danger);
+}
+
+.meter {
+  position: relative;
+  display: flex;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.meter-within {
+  background: #7d8fa4;
+  border-radius: 999px 0 0 999px;
+}
+
+[data-status='within'] .meter-within {
+  border-radius: 999px;
+}
+
+.meter-above {
+  background: var(--danger);
+  border-radius: 0 999px 999px 0;
+}
+
+// Norma zawsze w połowie skali.
+.meter-limit {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: calc(50% - 1px);
+  width: 2px;
+  background: var(--ink);
+}
+
+.norm-basis {
+  font-size: var(--t-xs);
+  color: var(--ink-3);
+}
