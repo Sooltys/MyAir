@@ -17,6 +17,15 @@
         ],
         "createdAt": "2026-11-18T01:40:25.426Z",
         "reason": "Agent: 15px/21px are SVG user units for the map labels inside a 700-unit viewBox (rendered at about 13px and 10px), not CSS type steps."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/*.html"
+        ],
+        "createdAt": "2026-11-18T01:41:12.796Z",
+        "reason": "Agent: spent decision-round sketches of the rejected directions (Archivo, Overpass); not shipped, gitignored, intentionally off the chosen system."
       }
     ]
   }
