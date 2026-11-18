@@ -1,72 +1,83 @@
-<a matMiniFab color="accent" routerLink="/" aria-label="Strona główna">
-  <mat-icon>home</mat-icon>
-</a>
-
 @if (voivodeship(); as voivodeship) {
-  <h2>{{ voivodeship.name | uppercase }}</h2>
+  <div class="layout">
+    <aside class="stations card" aria-labelledby="stations-heading">
+      <div class="stations-head">
+        <h2 id="stations-heading">
+          Stacje
+          @if (stations.hasValue()) {
+            <span class="count num">{{ voivodeshipStations().length }}</span>
+          }
+        </h2>
+        <div class="segmented" role="group" aria-label="Kolejność stacji">
+          <button type="button" [attr.aria-pressed]="sort() === 'az'" (click)="sort.set('az')">
+            Alfabetycznie
+          </button>
+          <button
+            type="button"
+            [attr.aria-pressed]="sort() === 'worst'"
+            (click)="sort.set('worst')"
+          >
+            Od najgorszych
+          </button>
+        </div>
+      </div>
 
-  @if (selectedStation(); as station) {
-    <section class="sensors">
-      <button matButton="elevated" color="accent" type="button" (click)="backToStations()">
-        Powrót
-      </button>
-      <h2>{{ station.city | uppercase }}{{ station.street ? ', ' + (station.street | uppercase) : '' }}</h2>
-
-      @if (readings.error()) {
-        <div class="error" role="alert">
-          <p>Nie udało się pobrać danych z GIOŚ. Spróbuj ponownie za chwilę.</p>
-          <button matButton="elevated" type="button" (click)="readings.reload()">
+      @if (stations.error()) {
+        <div class="notice" role="alert">
+          <p>Nie udało się pobrać listy stacji z GIOŚ. Spróbuj ponownie za chwilę.</p>
+          <button class="btn" type="button" (click)="stations.reload()">
+            <app-icon name="refresh" [size]="18" />
             Spróbuj ponownie
           </button>
         </div>
-      } @else if (readings.isLoading()) {
-        <p class="status">Ładowanie odczytów…</p>
-      } @else if (readings.hasValue()) {
-        <div class="sensor-list">
-          @for (item of readings.value(); track item.sensor.id) {
-            <div class="sensor" [title]="item.sensor.paramName">
-              <b>{{ paramLabel(item) }}</b>
-              @if (item.reading; as reading) {
-                <span class="value">{{ reading.value }} µg/m³</span>
-                <span class="date">{{ reading.date }}</span>
-              } @else if (item.failed) {
-                <span class="date">błąd pobierania</span>
-              } @else {
-                <span class="date">brak bieżących danych</span>
-              }
-            </div>
-          } @empty {
-            <p class="status">Ta stacja nie ma stanowisk pomiarowych.</p>
+      } @else if (stations.isLoading()) {
+        <ul class="plain rows" aria-hidden="true">
+          @for (row of [1, 2, 3, 4, 5, 6, 7]; track row) {
+            <li class="row is-skeleton">
+              <span class="place">
+                <span class="skeleton" style="width: 96px; height: 16px"></span>
+                <span class="skeleton" style="width: 148px; height: 14px"></span>
+              </span>
+              <span class="skeleton" style="width: 64px; height: 22px"></span>
+            </li>
           }
-        </div>
+        </ul>
+        <p class="visually-hidden" role="status">Ładowanie stacji…</p>
+      } @else {
+        <ul class="plain rows">
+          @for (station of sortedStations(); track station.id) {
+            <li>
+              <a
+                class="row station"
+                [routerLink]="['stacja', station.id]"
+                routerLinkActive="is-current"
+                ariaCurrentWhenActive="page"
+              >
+                <span class="place">
+                  <span class="city">{{ station.city }}</span>
+                  <span class="street">{{ station.street ?? station.name }}</span>
+                </span>
+                <app-index-badge [level]="levelOf(station.id)" [small]="true" />
+              </a>
+            </li>
+          } @empty {
+            <li class="notice">Brak stacji pomiarowych w tym województwie.</li>
+          }
+        </ul>
       }
+    </aside>
+
+    <section class="detail">
+      <router-outlet />
     </section>
-  } @else {
-    @if (stations.error()) {
-      <div class="error" role="alert">
-        <p>Nie udało się pobrać listy stacji z GIOŚ. Spróbuj ponownie za chwilę.</p>
-        <button matButton="elevated" type="button" (click)="stations.reload()">
-          Spróbuj ponownie
-        </button>
-      </div>
-    } @else if (stations.isLoading()) {
-      <p class="status">Ładowanie stacji…</p>
-    } @else {
-      <div class="stations">
-        @for (station of voivodeshipStations(); track station.id) {
-          <button type="button" class="station" (click)="selectStation(station)">
-            <b>{{ station.city }}</b>
-            @if (station.street) {
-              <br />{{ station.street }}
-            }
-            <br /><i>ID: {{ station.id }}</i>
-          </button>
-        } @empty {
-          <p class="status">Brak stacji pomiarowych w tym województwie.</p>
-        }
-      </div>
-    }
-  }
+  </div>
 } @else {
-  <p class="status">Nie ma takiego województwa.</p>
+  <div class="missing">
+    <h1>Nie ma takiego województwa</h1>
+    <p>Adres nie pasuje do żadnego z 16 województw.</p>
+    <a class="btn" routerLink="/">
+      <app-icon name="chevron-left" [size]="18" />
+      Wróć do mapy
+    </a>
+  </div>
 }

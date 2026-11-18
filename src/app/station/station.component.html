@@ -1,0 +1,215 @@
+@let place = voivodeship();
+<nav class="crumbs" aria-label="Jesteś tutaj">
+  <a routerLink="/">Polska</a>
+  <app-icon name="chevron-right" [size]="14" />
+  @if (place) {
+    <a [routerLink]="['/wojewodztwo', place.id]">{{ place.name }}</a>
+    <app-icon name="chevron-right" [size]="14" />
+  }
+  <span aria-current="page">{{ title() ?? 'Stacja' }}</span>
+</nav>
+
+@if (station() === undefined) {
+  @if (stationsError()) {
+    <div class="card notice" role="alert">
+      <p>Nie udało się pobrać listy stacji z GIOŚ. Spróbuj ponownie za chwilę.</p>
+    </div>
+  } @else {
+    <section class="hero card" aria-busy="true">
+      <span class="disc skeleton"></span>
+      <div class="hero-body">
+        <span class="skeleton" style="width: 60%; height: 34px"></span>
+        <span class="skeleton" style="width: 85%; height: 20px"></span>
+      </div>
+    </section>
+  }
+} @else if (station() === null) {
+  <div class="card notice">
+    <h1>Nie ma takiej stacji</h1>
+    <p>Tej stacji nie ma na liście GIOŚ dla tego województwa. Wybierz stację z listy.</p>
+  </div>
+} @else {
+  @let stationLevel = level();
+  <section
+    class="hero card"
+    [attr.data-level]="levelAttr()"
+    [class.is-warn]="stationLevel === 3"
+    [class.is-alarm]="stationLevel === 4 || stationLevel === 5"
+    aria-labelledby="station-title"
+  >
+    <div class="verdict">
+      @if (index.error()) {
+        <div class="disc is-unknown">
+          <span class="disc-level">?</span>
+          <span class="disc-caption">indeks GIOŚ</span>
+        </div>
+      } @else if (stationLevel === undefined) {
+        <span class="disc skeleton"><span class="visually-hidden">Wczytywanie indeksu</span></span>
+      } @else {
+        <div class="disc" [attr.data-level]="levelAttr()">
+          <span class="disc-level">{{ levelName(stationLevel) }}</span>
+          <span class="disc-caption">indeks GIOŚ</span>
+        </div>
+      }
+
+      @if (stationLevel !== undefined && stationLevel !== null) {
+        <div
+          class="level-scale"
+          role="img"
+          [attr.aria-label]="
+            'Poziom ' + (stationLevel + 1) + ' z 6 w skali GIOŚ: ' + levelName(stationLevel)
+          "
+        >
+          <span class="steps">
+            @for (lvl of levels; track lvl) {
+              <span
+                class="step"
+                [attr.data-level]="lvl"
+                [class.is-current]="lvl === stationLevel"
+              ></span>
+            }
+          </span>
+          <span class="ends" aria-hidden="true"
+            ><span>bardzo dobry</span><span>bardzo zły</span></span
+          >
+        </div>
+      }
+    </div>
+
+    <div class="hero-body">
+      <h1 id="station-title">{{ title() }}</h1>
+
+      @if (headline(); as headline) {
+        <p class="headline">{{ headline }}</p>
+      } @else if (series.isLoading()) {
+        <span class="skeleton" style="width: 80%; height: 22px"></span>
+      }
+
+      <dl class="facts">
+        @if (critical(); as critical) {
+          <div>
+            <dt>Decyduje</dt>
+            <dd>{{ critical }}</dd>
+          </div>
+        }
+        @if (indexTime(); as time) {
+          <div>
+            <dt>Indeks z</dt>
+            <dd>
+              <time>{{ time }}</time>
+            </dd>
+          </div>
+        }
+        <div>
+          <dt>Stacja GIOŚ</dt>
+          <dd class="num">nr {{ station()?.id }}</dd>
+        </div>
+      </dl>
+
+      @if (index.error()) {
+        <p class="inline-error" role="alert">Nie udało się pobrać indeksu z GIOŚ.</p>
+      }
+
+      <button
+        class="btn-link refresh"
+        type="button"
+        (click)="refresh()"
+        [disabled]="index.isLoading() || series.isLoading()"
+      >
+        <app-icon name="refresh" [size]="16" />
+        {{ index.isLoading() || series.isLoading() ? 'Odświeżanie…' : 'Odśwież' }}
+      </button>
+    </div>
+  </section>
+
+  <section class="readings" aria-labelledby="readings-title">
+    <h2 id="readings-title">Pomiary z ostatniej doby</h2>
+
+    @if (series.error()) {
+      <div class="card notice" role="alert">
+        <p>Nie udało się pobrać odczytów z GIOŚ. Spróbuj ponownie za chwilę.</p>
+        <button class="btn" type="button" (click)="series.reload()">
+          <app-icon name="refresh" [size]="18" />
+          Spróbuj ponownie
+        </button>
+      </div>
+    } @else if (readings(); as readings) {
+      @if (readings.cards.length > 0) {
+        <div class="grid">
+          @for (card of readings.cards; track card.series.sensor.id) {
+            <app-pollutant-card [card]="card" />
+          }
+        </div>
+      } @else {
+        <p class="card notice">
+          Ta stacja nie ma teraz bieżących pomiarów wskaźników objętych normami.
+        </p>
+      }
+
+      @if (readings.others.length > 0) {
+        <details class="others card">
+          <summary>
+            Pozostałe stanowiska
+            <span class="num">({{ readings.others.length }})</span>
+            <app-icon name="chevron-right" [size]="16" class="chevron" />
+          </summary>
+          <ul class="plain">
+            @for (other of readings.others; track other.series.sensor.id) {
+              <li>
+                <span class="other-name">{{ other.series.sensor.paramName }}</span>
+                @if (other.latest; as latest) {
+                  <span class="other-value">
+                    <span class="num">{{ formatValue(latest.value) }}</span> µg/m³ ·
+                    <time>{{ when(latest.date) }}</time>
+                  </span>
+                } @else if (other.series.failed) {
+                  <span class="other-value is-error">nie udało się pobrać</span>
+                } @else if (other.series.measurements === null) {
+                  <span class="other-value">pomiar manualny, bez bieżących danych</span>
+                } @else {
+                  <span class="other-value">brak pomiarów z ostatniej doby</span>
+                }
+              </li>
+            }
+          </ul>
+        </details>
+      }
+    } @else {
+      <div class="grid" aria-hidden="true">
+        @for (n of [1, 2, 3, 4]; track n) {
+          <div class="card skeleton-card">
+            <span class="skeleton" style="width: 40%; height: 22px"></span>
+            <span class="skeleton" style="width: 55%; height: 36px"></span>
+            <span class="skeleton" style="width: 100%; height: 64px"></span>
+          </div>
+        }
+      </div>
+      <p class="visually-hidden" role="status">Ładowanie odczytów…</p>
+    }
+  </section>
+
+  <section class="about card" aria-labelledby="about-title">
+    <h2 id="about-title">Skąd te oceny?</h2>
+    <p>
+      Poziom i kolor to <strong>Polski Indeks Jakości Powietrza</strong> policzony przez GIOŚ z
+      godzinowych pomiarów SO₂, NO₂, PM10, PM2.5 i O₃. Indeks stacji to najgorszy z indeksów tych
+      zanieczyszczeń; gdy stacja nie mierzy zanieczyszczenia, które decyduje o jakości powietrza w
+      województwie, GIOŚ podaje „Brak indeksu”.
+    </p>
+    <p>
+      Normy porównujemy w ich własnym okresie uśredniania:
+      <strong>wytyczne WHO z 2021 r.</strong> (zdrowotne) i
+      <strong>normy UE obowiązujące w Polsce</strong> (dyrektywa 2008/50/WE). Średnia dobowa wymaga
+      co najmniej 18 godzin pomiarów, a norm rocznych nie porównujemy z danymi z jednej doby.
+      Wartości pomiarów pokazujemy tak, jak publikuje je GIOŚ.
+    </p>
+    <ul class="plain scale" aria-label="Poziomy indeksu GIOŚ">
+      @for (lvl of levels; track lvl) {
+        <li [attr.data-level]="lvl">
+          <span class="swatch"></span>
+          {{ levelName(lvl) }}
+        </li>
+      }
+    </ul>
+  </section>
+}

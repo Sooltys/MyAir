@@ -1,16 +1,21 @@
-<mat-toolbar color="primary">
+<div class="inner">
   <a routerLink="/" class="brand">
-    <img src="/favicon.png" alt="" width="32" height="32" />
+    <img src="/favicon.png" alt="" width="28" height="28" />
     <span>My Air</span>
   </a>
-  <span class="spacer"></span>
-  <button matButton="elevated" [matMenuTriggerFor]="menu">Województwa</button>
-  <mat-menu #menu="matMenu">
-    @for (voivodeship of voivodeships; track voivodeship.id) {
-      <a mat-menu-item [routerLink]="['/wojewodztwo', voivodeship.id]">{{ voivodeship.name }}</a>
-    }
-  </mat-menu>
-  <a matButton="elevated" color="accent" href="https://puzyna.pl" target="_blank" rel="noopener">
-    Autor
-  </a>
-</mat-toolbar>
+  <app-station-search class="search" />
+  <nav class="nav" aria-label="Główna nawigacja">
+    <a
+      routerLink="/"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+      >Mapa</a
+    >
+    <a href="https://puzyna.pl" target="_blank" rel="noopener">
+      Autor
+      <app-icon name="external" [size]="16" />
+      <span class="visually-hidden">(otwiera się w nowej karcie)</span>
+    </a>
+  </nav>
+</div>

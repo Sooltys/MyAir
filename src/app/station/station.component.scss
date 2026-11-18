@@ -1,0 +1,307 @@
+:host {
+  display: grid;
+  gap: 24px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+  padding: 28px;
+  transition:
+    background-color 200ms ease-out,
+    border-color 200ms ease-out,
+    color 200ms ease-out;
+
+  // Dostateczny: karta lekko podbarwiona.
+  &.is-warn {
+    background: var(--warn-tint);
+    border-color: var(--warn-line);
+  }
+
+  // Zły i bardzo zły: cała karta w kolorze indeksu – głośno, bo jest źle.
+  &.is-alarm {
+    background: var(--lvl);
+    border-color: var(--lvl);
+    color: var(--lvl-ink);
+
+    .headline,
+    .facts dt,
+    .facts dd,
+    .inline-error,
+    .refresh {
+      color: var(--lvl-ink);
+    }
+
+    // Odwrócony dysk: biały, poziom w kolorze indeksu – najmocniejszy punkt ekranu.
+    .disc {
+      background: #ffffff;
+      color: var(--lvl);
+      box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.35);
+    }
+  }
+}
+
+.verdict {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: 168px;
+}
+
+// Skala GIOŚ: sześć poziomów, bieżący wyróżniony. Na białej podkładce, żeby czytała się też
+// na karcie zalanej kolorem indeksu.
+.level-scale {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 6px 6px 4px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.level-scale .steps {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  gap: 3px;
+  height: 14px;
+}
+
+.level-scale .step {
+  height: 6px;
+  border-radius: 2px;
+  background: var(--lvl);
+  opacity: 0.45;
+
+  &.is-current {
+    height: 14px;
+    opacity: 1;
+    box-shadow:
+      0 0 0 2px var(--surface),
+      0 0 0 3px var(--ink);
+  }
+}
+
+.level-scale .ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--t-xs);
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
+.disc {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 2px;
+  width: 168px;
+  height: 168px;
+  padding: 12px;
+  border-radius: 50%;
+  background: var(--lvl);
+  color: var(--lvl-ink);
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgb(17 24 39 / 0.08);
+
+  &.is-unknown {
+    background: var(--lvl-none);
+    color: var(--ink-2);
+  }
+}
+
+.disc-level {
+  font-size: var(--t-xl);
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.disc-caption {
+  font-size: var(--t-xs);
+  font-weight: 600;
+}
+
+.hero-body {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+
+  h1 {
+    font-size: var(--t-3xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+.headline {
+  max-width: 62ch;
+  font-size: var(--t-lg);
+  font-weight: 500;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+
+  div {
+    display: grid;
+  }
+
+  dt {
+    font-size: var(--t-xs);
+    color: var(--ink-3);
+  }
+
+  dd {
+    font-weight: 600;
+  }
+}
+
+.inline-error {
+  font-size: var(--t-sm);
+  color: var(--danger);
+}
+
+.readings {
+  display: grid;
+  gap: 16px;
+
+  h2 {
+    font-size: var(--t-xl);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+.skeleton-card {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+
+.others {
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    .num {
+      font-weight: 400;
+      color: var(--ink-3);
+    }
+  }
+
+  .chevron {
+    margin-left: auto;
+    color: var(--ink-3);
+    transition: transform 150ms ease-out;
+  }
+
+  &[open] .chevron {
+    transform: rotate(90deg);
+  }
+
+  ul {
+    padding: 0 20px 12px;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 16px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: var(--t-sm);
+  }
+}
+
+.other-value {
+  color: var(--ink-2);
+
+  &.is-error {
+    color: var(--danger);
+  }
+}
+
+.about {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+
+  h2 {
+    font-size: var(--t-lg);
+    color: var(--ink);
+  }
+
+  p {
+    max-width: 75ch;
+  }
+}
+
+.scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 4px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+  }
+}
+
+@media (max-width: 719.98px) {
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 20px;
+    padding: 20px 16px;
+  }
+
+  .verdict {
+    width: 168px;
+  }
+
+  .disc {
+    width: 128px;
+    height: 128px;
+  }
+
+  .disc-level {
+    font-size: var(--t-lg);
+  }
+
+  .hero-body h1 {
+    font-size: var(--t-2xl);
+  }
+
+  .headline {
+    font-size: var(--t-md);
+  }
+
+  .about {
+    padding: 20px 16px;
+  }
+}

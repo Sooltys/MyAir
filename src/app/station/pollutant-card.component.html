@@ -1,0 +1,116 @@
+@let item = card();
+<article class="card pollutant" [attr.aria-labelledby]="headingId()">
+  <header>
+    <h3 [id]="headingId()">
+      <span class="code">{{ item.label }}</span>
+      <span class="name">{{ item.name }}</span>
+    </h3>
+    @if (item.index) {
+      <app-index-badge
+        [level]="item.index.level"
+        [small]="true"
+        [attr.title]="'Indeks cząstkowy GIOŚ'"
+      />
+    }
+  </header>
+
+  @if (item.latest; as latest) {
+    <p class="value">
+      <span class="num">{{ value(latest.value) }}</span>
+      <span class="unit">µg/m³</span>
+    </p>
+    <p class="time">
+      ostatni pomiar: <time>{{ when(latest.date) }}</time>
+    </p>
+
+    <figure class="chart">
+      <svg
+        [attr.viewBox]="'0 0 ' + chartWidth + ' ' + chartHeight"
+        preserveAspectRatio="none"
+        role="slider"
+        tabindex="0"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="bars().length - 1"
+        [attr.aria-valuenow]="active() ?? latestIndex()"
+        [attr.aria-valuetext]="sliderText()"
+        [attr.aria-label]="chartLabel()"
+        [attr.data-level]="latestLevel()"
+        (pointermove)="onPointer($event)"
+        (pointerdown)="onPointer($event)"
+        (pointerleave)="active.set(null)"
+        (focus)="onFocus()"
+        (blur)="active.set(null)"
+        (keydown)="onKeydown($event)"
+      >
+        @for (bar of bars(); track bar.index) {
+          <rect
+            [class.gap]="bar.measurement.value === null"
+            [class.is-latest]="bar.index === latestIndex()"
+            [class.is-active]="bar.index === active()"
+            [attr.x]="bar.x"
+            [attr.y]="bar.y"
+            [attr.width]="barWidth"
+            [attr.height]="bar.height"
+          />
+        }
+        @if (meanY(); as y) {
+          <line class="mean" x1="0" [attr.x2]="chartWidth" [attr.y1]="y" [attr.y2]="y" />
+        }
+      </svg>
+      <figcaption>
+        <time>{{ firstHour() }}</time>
+        <span class="readout">
+          @if (activeReading(); as reading) {
+            <strong>{{ reading.hour }}</strong> · <span class="num">{{ reading.value }}</span>
+          } @else if (mean(); as mean) {
+            średnia z doby: <span class="num">{{ derived(mean) }}</span> µg/m³
+          }
+        </span>
+        <time>{{ lastHour() }}</time>
+      </figcaption>
+    </figure>
+  } @else if (item.series.failed) {
+    <p class="error" role="alert">
+      <app-icon name="alert" [size]="18" />
+      Nie udało się pobrać odczytów z GIOŚ.
+    </p>
+  }
+
+  @if (item.checks.length > 0) {
+    <ul class="plain norms" aria-label="Porównanie z normami">
+      @for (check of item.checks; track $index) {
+        <li [attr.data-status]="check.status">
+          <div class="norm-head">
+            <span class="norm-title">{{ normTitle(check) }}</span>
+            @if (figure(check); as figure) {
+              <span class="norm-figure">
+                @if (check.status === 'above') {
+                  <app-icon name="alert" [size]="16" />
+                }
+                <span class="num">{{ figure }}</span>
+              </span>
+            }
+          </div>
+          @if (check.measured !== null) {
+            <div
+              class="meter"
+              role="meter"
+              aria-valuemin="0"
+              [attr.aria-valuemax]="check.norm.limit * 2"
+              [attr.aria-valuenow]="check.measured"
+              [attr.aria-valuetext]="meterText(check)"
+              [attr.aria-label]="normTitle(check)"
+            >
+              <span class="meter-within" [style.width.%]="withinWidth(check)"></span>
+              @if (aboveWidth(check) > 0) {
+                <span class="meter-above" [style.width.%]="aboveWidth(check)"></span>
+              }
+              <span class="meter-limit" aria-hidden="true"></span>
+            </div>
+          }
+          <p class="norm-basis">{{ basisText(check) }}</p>
+        </li>
+      }
+    </ul>
+  }
+</article>

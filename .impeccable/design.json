@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T01:39:19+00:00",
+  "title": "Design System: MyAir",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Cool Ground",
+        "canonical": "#f3f5f8",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#404244",
+          "#606164",
+          "#818285",
+          "#a3a5a8",
+          "#c7c9cc",
+          "#edeff1"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "canonical": "#f7f9fb",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#414244",
+          "#606163",
+          "#818284",
+          "#a3a5a7",
+          "#c7c9cb",
+          "#edeff1"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#111827",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232529",
+          "#3e424b",
+          "#5a616f",
+          "#798296",
+          "#9ea5b4",
+          "#c4c9d3",
+          "#eceef3"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "canonical": "#4b5563",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232528",
+          "#3e4249",
+          "#5a626d",
+          "#798392",
+          "#9ea6b1",
+          "#c4cad1",
+          "#eceff2"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Pewter",
+        "canonical": "#5f6b7a",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232528",
+          "#3d434a",
+          "#59626d",
+          "#778493",
+          "#9da6b2",
+          "#c3cad2",
+          "#eceff3"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#e3e8ee",
+        "tonalRamp": [
+          "#080b0f",
+          "#22252a",
+          "#3e4247",
+          "#5d6267",
+          "#7e8388",
+          "#a1a5ab",
+          "#c5cacf",
+          "#eaeff5"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Firm Hairline",
+        "canonical": "#cdd5df",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#242527",
+          "#3f4246",
+          "#5c6268",
+          "#7c838c",
+          "#a0a6ad",
+          "#c6c9ce",
+          "#edeff1"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Wind-Line Blue",
+        "canonical": "#0b6fb8",
+        "tonalRamp": [
+          "#050c14",
+          "#172636",
+          "#204566",
+          "#27659b",
+          "#3187d0",
+          "#70aae2",
+          "#a8cef3",
+          "#e3f0fe"
+        ]
+      },
+      "accent-strong": {
+        "role": "primary",
+        "displayName": "Deep Wind-Line Blue",
+        "canonical": "#095a96",
+        "tonalRamp": [
+          "#060c12",
+          "#192633",
+          "#264461",
+          "#336593",
+          "#4287c5",
+          "#79aada",
+          "#adcded",
+          "#e3f0fe"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Pale Wind-Line Blue",
+        "canonical": "#e8f2fb",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#232527",
+          "#3e4346",
+          "#5c6268",
+          "#7b848b",
+          "#9fa6ac",
+          "#c5cace",
+          "#eceff1"
+        ]
+      },
+      "selection": {
+        "role": "primary",
+        "displayName": "Selection Blue",
+        "canonical": "#cfe3f6",
+        "tonalRamp": [
+          "#090b0d",
+          "#222629",
+          "#3b434b",
+          "#56636f",
+          "#738596",
+          "#99a7b4",
+          "#c1cad3",
+          "#ebeff3"
+        ]
+      },
+      "danger": {
+        "role": "neutral",
+        "displayName": "Alarm Brick",
+        "canonical": "#b42318",
+        "tonalRamp": [
+          "#150705",
+          "#381c18",
+          "#6b2b23",
+          "#a13a2e",
+          "#d94c3c",
+          "#ec8373",
+          "#fdb4a8",
+          "#fee9e5"
+        ]
+      },
+      "bar": {
+        "role": "neutral",
+        "displayName": "Bar Grey",
+        "canonical": "#c4cdd8",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#232527",
+          "#3f4247",
+          "#5c6269",
+          "#7b838d",
+          "#9fa6ad",
+          "#c5cacf",
+          "#edeff1"
+        ]
+      },
+      "meter-within": {
+        "role": "neutral",
+        "displayName": "Meter Slate",
+        "canonical": "#7d8fa4",
+        "tonalRamp": [
+          "#090b0e",
+          "#22252a",
+          "#3b434c",
+          "#566372",
+          "#738499",
+          "#99a7b6",
+          "#c1cad5",
+          "#ebeff4"
+        ]
+      },
+      "map-region": {
+        "role": "neutral",
+        "displayName": "Map Grey",
+        "canonical": "#e1e7ee",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#404245",
+          "#5e6266",
+          "#7e8389",
+          "#a1a5aa",
+          "#c7c9cd",
+          "#edeef0"
+        ]
+      },
+      "map-region-hover": {
+        "role": "neutral",
+        "displayName": "Map Hover Blue",
+        "canonical": "#c7dcf0",
+        "tonalRamp": [
+          "#090b0d",
+          "#222629",
+          "#3a434b",
+          "#556370",
+          "#728597",
+          "#98a7b5",
+          "#c1cad4",
+          "#eaeff4"
+        ]
+      },
+      "warn-tint": {
+        "role": "index",
+        "displayName": "Dostateczny Wash",
+        "canonical": "#fff4e6",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#272522",
+          "#46413c",
+          "#676057",
+          "#8a8174",
+          "#aba49a",
+          "#cdc8c2",
+          "#f0eeeb"
+        ]
+      },
+      "warn-line": {
+        "role": "index",
+        "displayName": "Dostateczny Rule",
+        "canonical": "#f6cf9f",
+        "tonalRamp": [
+          "#0e0a06",
+          "#2b241b",
+          "#4f3f2b",
+          "#765c3b",
+          "#9e7b4e",
+          "#bba07f",
+          "#d8c6b0",
+          "#f6ede2"
+        ]
+      },
+      "lvl-0": {
+        "role": "index",
+        "displayName": "Bardzo dobry Green",
+        "canonical": "#57b108",
+        "tonalRamp": [
+          "#060e03",
+          "#192b11",
+          "#264d0d",
+          "#397212",
+          "#4b980c",
+          "#79b958",
+          "#add89a",
+          "#e2f6d9"
+        ]
+      },
+      "lvl-1": {
+        "role": "index",
+        "displayName": "Dobry Lime",
+        "canonical": "#b0dd10",
+        "tonalRamp": [
+          "#090d01",
+          "#20290a",
+          "#394900",
+          "#556b12",
+          "#72900d",
+          "#93b43e",
+          "#bdd48d",
+          "#e8f4d3"
+        ]
+      },
+      "lvl-2": {
+        "role": "index",
+        "displayName": "Umiarkowany Yellow",
+        "canonical": "#ffd911",
+        "tonalRamp": [
+          "#0f0b01",
+          "#2c2507",
+          "#4e4105",
+          "#726002",
+          "#97811a",
+          "#bea430",
+          "#daca88",
+          "#f6efd1"
+        ]
+      },
+      "lvl-3": {
+        "role": "index",
+        "displayName": "Dostateczny Orange",
+        "canonical": "#e58100",
+        "tonalRamp": [
+          "#130903",
+          "#34200f",
+          "#613608",
+          "#8e4f08",
+          "#ba6d1e",
+          "#db9252",
+          "#efbe96",
+          "#feeadb"
+        ]
+      },
+      "lvl-4": {
+        "role": "index",
+        "displayName": "Zły Red",
+        "canonical": "#e50000",
+        "tonalRamp": [
+          "#180504",
+          "#3e1813",
+          "#751f17",
+          "#b12017",
+          "#ee2218",
+          "#ff7462",
+          "#fab5aa",
+          "#fee9e6"
+        ]
+      },
+      "lvl-5": {
+        "role": "index",
+        "displayName": "Bardzo zły Maroon",
+        "canonical": "#990000",
+        "tonalRamp": [
+          "#150705",
+          "#381c18",
+          "#692c25",
+          "#9f3c31",
+          "#d64f40",
+          "#ea8475",
+          "#fbb5aa",
+          "#fee9e6"
+        ]
+      },
+      "lvl-none": {
+        "role": "index",
+        "displayName": "Brak indeksu Grey",
+        "canonical": "#e4e8ed",
+        "tonalRamp": [
+          "#090b0f",
+          "#222529",
+          "#3f4246",
+          "#5e6266",
+          "#7f8387",
+          "#a2a5aa",
+          "#c6c9ce",
+          "#ebeff4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page and station titles (h1); 1.728rem below 720px."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Latest pollutant value; tabular figures."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings, voivodeship verdict, level name in the disc."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card headings, pollutant code, brand."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Answer-first hero sentence and home intro; 1rem on phones."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, capped at 70–75ch."
+      },
+      "body-sm": {
+        "displayName": "Body small",
+        "purpose": "Pollutant names, norm rows, legends, footer."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, nav, segmented control, index badges."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Chart hours, norm basis, fact terms, scale end labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 1px 2px rgb(17 24 39 / 0.05), 0 6px 16px -6px rgb(17 24 39 / 0.08)",
+        "purpose": "Every resting card, with the 1px hairline border."
+      },
+      {
+        "name": "popover",
+        "value": "0 12px 32px -8px rgb(17 24 39 / 0.18), 0 2px 6px rgb(17 24 39 / 0.06)",
+        "purpose": "Search results panel."
+      },
+      {
+        "name": "segment-thumb",
+        "value": "0 1px 2px rgb(17 24 39 / 0.1)",
+        "purpose": "Selected option of the segmented control."
+      },
+      {
+        "name": "alarm-disc-lift",
+        "value": "0 8px 24px -8px rgb(0 0 0 / 0.35)",
+        "purpose": "Inverted white disc on a flooded level 4–5 hero only."
+      },
+      {
+        "name": "fill-edge",
+        "value": "inset 0 0 0 1px rgb(17 24 39 / 0.07)",
+        "purpose": "Inner edge on badges, swatches and disc so pale fills hold shape."
+      },
+      {
+        "name": "input-focus-halo",
+        "value": "0 0 0 3px rgb(11 111 184 / 0.18)",
+        "purpose": "Search input focus, with accent border."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid #0b6fb8; outline-offset: 2px",
+        "purpose": "Global :focus-visible."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-hover",
+        "value": "150ms ease-out",
+        "purpose": "Hover/press background, border and colour changes; details chevron rotation; skip link."
+      },
+      {
+        "name": "ease-loudness",
+        "value": "200ms ease-out",
+        "purpose": "Hero and verdict colour change when index data lands (Volume Rule)."
+      },
+      {
+        "name": "ease-chart",
+        "value": "120ms ease-out",
+        "purpose": "Chart bar fill when the readout moves."
+      },
+      {
+        "name": "skeleton-sweep",
+        "value": "1.4s ease-in-out infinite",
+        "purpose": "Loading skeleton gradient (#eceff3 → #f6f8fa)."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "All animations and transitions under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "720px"
+      },
+      {
+        "name": "home-list",
+        "value": "960px"
+      },
+      {
+        "name": "list-detail",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Quiet bordered neutral button for secondary actions such as retry.",
+      "html": "<button class=\"ds-btn\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v5h-5\"/></svg>Spróbuj ponownie</button>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} .ds-btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);color:var(--ink);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:background-color 150ms ease-out,border-color 150ms ease-out}.ds-btn:hover{background:var(--surface-2);border-color:var(--ink-3)}.ds-btn:active{background:var(--line)}.ds-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"
+    },
+    {
+      "name": "Link Button",
+      "kind": "button",
+      "refersTo": "button-link",
+      "description": "Boxless accent action, e.g. Odśwież in the hero.",
+      "html": "<button class=\"ds-btn-link\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v5h-5\"/></svg>Odśwież</button>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} .ds-btn-link{display:inline-flex;align-items:center;gap:6px;padding:4px 0;border:0;background:none;color:var(--accent);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer}.ds-btn-link:hover{color:var(--accent-strong);text-decoration:underline;text-underline-offset:.18em}.ds-btn-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}"
+    },
+    {
+      "name": "Station Search",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Header combobox that finds a station by city or street, ignoring Polish diacritics.",
+      "html": "<div class=\"ds-search\"><span class=\"ds-search-lead\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"m20 20-4.4-4.4\"/></svg></span><input type=\"search\" placeholder=\"Szukaj miasta lub ulicy\" aria-label=\"Szukaj stacji\"></div>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} .ds-search{position:relative;display:flex;align-items:center;max-width:440px}.ds-search-lead{position:absolute;left:12px;display:inline-flex;color:var(--ink-3);pointer-events:none}.ds-search input{width:100%;height:40px;padding:0 40px 0 38px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface-2);font:inherit;font-size:1rem;color:var(--ink);transition:border-color 150ms ease-out,background-color 150ms ease-out}.ds-search input::placeholder{color:var(--ink-3)}.ds-search input:hover{border-color:var(--ink-3)}.ds-search input:focus{outline:none;border-color:var(--accent);background:var(--surface);box-shadow:0 0 0 3px rgb(11 111 184 / .18)}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Right-aligned header links; current route in accent, external link with arrow.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Mapa</a><a href=\"#\">Autor<svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 16 16 8\"/><path d=\"M9.5 8H16v6.5\"/></svg></a></nav>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} .ds-nav{display:flex;gap:4px}.ds-nav a{display:inline-flex;align-items:center;gap:4px;min-height:40px;padding:0 12px;border-radius:var(--radius);color:var(--ink-2);font-size:.875rem;font-weight:600;text-decoration:none;transition:background-color 150ms ease-out,color 150ms ease-out}.ds-nav a:hover{background:var(--surface-2);color:var(--ink)}.ds-nav a.is-active{color:var(--accent)}.ds-nav a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"
+    },
+    {
+      "name": "Index Badges",
+      "kind": "chip",
+      "refersTo": "index-badge",
+      "description": "GIOŚ level pills: legend fills verbatim, ink text on 0–3, white on 4–5, neutral for Brak indeksu.",
+      "html": "<div class=\"ds-badges\"><span class=\"ds-badge\" data-level=\"0\">Bardzo dobry</span><span class=\"ds-badge\" data-level=\"1\">Dobry</span><span class=\"ds-badge\" data-level=\"2\">Umiarkowany</span><span class=\"ds-badge\" data-level=\"3\">Dostateczny</span><span class=\"ds-badge\" data-level=\"4\">Zły</span><span class=\"ds-badge\" data-level=\"5\">Bardzo zły</span><span class=\"ds-badge\" data-level=\"none\">Brak indeksu</span></div>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} [data-level]{--lvl:var(--lvl-none);--lvl-ink:var(--ink)}[data-level='0']{--lvl:var(--lvl-0)}[data-level='1']{--lvl:var(--lvl-1)}[data-level='2']{--lvl:var(--lvl-2)}[data-level='3']{--lvl:var(--lvl-3)}[data-level='4']{--lvl:var(--lvl-4);--lvl-ink:#fff}[data-level='5']{--lvl:var(--lvl-5);--lvl-ink:#fff}[data-level='none']{--lvl-ink:var(--ink-2)} .ds-badge{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--lvl);color:var(--lvl-ink);font-size:.875rem;font-weight:600;line-height:1;white-space:nowrap;box-shadow:inset 0 0 0 1px rgb(17 24 39 / .07)} .ds-badges{display:flex;flex-wrap:wrap;gap:8px}"
+    },
+    {
+      "name": "Segmented Sort",
+      "kind": "custom",
+      "refersTo": "segmented",
+      "description": "Two-option sort switch on the station list.",
+      "html": "<div class=\"ds-seg\" role=\"group\" aria-label=\"Sortowanie\"><button aria-pressed=\"true\">Alfabetycznie</button><button aria-pressed=\"false\">Od najgorszych</button></div>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} .ds-seg{display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:var(--radius);background:var(--ground);max-width:320px}.ds-seg button{min-height:32px;padding:0 12px;border:0;border-radius:6px;background:none;color:var(--ink-2);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:background-color 150ms ease-out,color 150ms ease-out}.ds-seg button:hover{color:var(--ink)}.ds-seg button[aria-pressed='true']{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(17 24 39 / .1)}.ds-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"
+    },
+    {
+      "name": "Station Row",
+      "kind": "card",
+      "refersTo": "list-row",
+      "description": "Station list row: city over street with a small index badge; current row in accent-soft.",
+      "html": "<div class=\"ds-rows\"><a href=\"#\" class=\"ds-row\"><span class=\"ds-place\"><span class=\"ds-city\">Kraków</span><span class=\"ds-street\">Al. Krasińskiego</span></span><span class=\"ds-badge ds-sm\" data-level=\"3\">Dostateczny</span></a><a href=\"#\" class=\"ds-row is-current\"><span class=\"ds-place\"><span class=\"ds-city\">Kraków</span><span class=\"ds-street\">ul. Bujaka</span></span><span class=\"ds-badge ds-sm\" data-level=\"4\">Zły</span></a></div>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} [data-level]{--lvl:var(--lvl-none);--lvl-ink:var(--ink)}[data-level='0']{--lvl:var(--lvl-0)}[data-level='1']{--lvl:var(--lvl-1)}[data-level='2']{--lvl:var(--lvl-2)}[data-level='3']{--lvl:var(--lvl-3)}[data-level='4']{--lvl:var(--lvl-4);--lvl-ink:#fff}[data-level='5']{--lvl:var(--lvl-5);--lvl-ink:#fff}[data-level='none']{--lvl-ink:var(--ink-2)} .ds-badge{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--lvl);color:var(--lvl-ink);font-size:.875rem;font-weight:600;line-height:1;white-space:nowrap;box-shadow:inset 0 0 0 1px rgb(17 24 39 / .07)} .ds-sm{height:22px;padding:0 8px;font-size:.75rem}.ds-rows{max-width:340px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}.ds-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:8px 10px;border-radius:var(--radius);color:var(--ink);text-decoration:none;transition:background-color 150ms ease-out}.ds-row:hover{background:var(--surface-2)}.ds-row.is-current{background:var(--accent-soft)}.ds-row.is-current .ds-city{color:var(--accent-strong)}.ds-row:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.ds-place{display:grid;gap:2px;min-width:0}.ds-city{font-weight:600}.ds-street{font-size:.875rem;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"
+    },
+    {
+      "name": "Station Hero (alarm)",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Signature verdict card at level 4: flooded in the index colour with an inverted white disc and the six-step scale on a white plate.",
+      "html": "<section class=\"ds-hero is-alarm\" data-level=\"4\"><div class=\"ds-verdict\"><div class=\"ds-disc\"><span class=\"ds-disc-level\">Zły</span><span class=\"ds-disc-cap\">indeks GIOŚ</span></div><div class=\"ds-scale\"><div class=\"ds-steps\"><span class=\"ds-step\" data-level=\"0\"></span><span class=\"ds-step\" data-level=\"1\"></span><span class=\"ds-step\" data-level=\"2\"></span><span class=\"ds-step\" data-level=\"3\"></span><span class=\"ds-step is-current\" data-level=\"4\"></span><span class=\"ds-step\" data-level=\"5\"></span></div><div class=\"ds-ends\"><span>bardzo dobry</span><span>bardzo zły</span></div></div></div><div class=\"ds-body\"><h1>Kraków, ul. Bujaka</h1><p class=\"ds-lede\">PM10 ponad wytyczną WHO: średnia z 24 h 60 µg/m³ przy 45 µg/m³ (1,3×).</p><dl class=\"ds-facts\"><div><dt>Decyduje</dt><dd>pył PM10</dd></div><div><dt>Indeks z</dt><dd>dziś, 01:00</dd></div></dl></div></section>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} [data-level]{--lvl:var(--lvl-none);--lvl-ink:var(--ink)}[data-level='0']{--lvl:var(--lvl-0)}[data-level='1']{--lvl:var(--lvl-1)}[data-level='2']{--lvl:var(--lvl-2)}[data-level='3']{--lvl:var(--lvl-3)}[data-level='4']{--lvl:var(--lvl-4);--lvl-ink:#fff}[data-level='5']{--lvl:var(--lvl-5);--lvl-ink:#fff}[data-level='none']{--lvl-ink:var(--ink-2)} .ds-hero{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:32px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow);transition:background-color 200ms ease-out,border-color 200ms ease-out,color 200ms ease-out}.ds-hero.is-alarm{background:var(--lvl);border-color:var(--lvl);color:var(--lvl-ink)}.ds-verdict{display:grid;justify-items:center;gap:14px;width:168px}.ds-disc{display:grid;place-content:center;justify-items:center;gap:2px;width:168px;height:168px;border-radius:50%;background:var(--lvl);color:var(--lvl-ink);text-align:center;box-shadow:inset 0 0 0 1px rgb(17 24 39 / .08)}.is-alarm .ds-disc{background:#fff;color:var(--lvl);box-shadow:0 8px 24px -8px rgb(0 0 0 / .35)}.ds-disc-level{font-size:1.44rem;font-weight:700;line-height:1.1}.ds-disc-cap{font-size:.75rem;font-weight:600}.ds-scale{display:grid;gap:4px;width:100%;padding:6px 6px 4px;border-radius:var(--radius);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}.ds-steps{display:grid;grid-template-columns:repeat(6,1fr);align-items:center;gap:3px;height:14px}.ds-step{height:6px;border-radius:2px;background:var(--lvl);opacity:.45}.ds-step.is-current{height:14px;opacity:1;box-shadow:0 0 0 2px var(--surface),0 0 0 3px var(--ink)}.ds-ends{display:flex;justify-content:space-between;font-size:.75rem;line-height:1.3;color:var(--ink-2)}.ds-body{display:grid;gap:12px}.ds-body h1{margin:0;font-size:2.074rem;font-weight:700;letter-spacing:-.02em;line-height:1.2}.ds-lede{margin:0;max-width:62ch;font-size:1.2rem;font-weight:500}.ds-facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0}.ds-facts div{display:grid}.ds-facts dt{font-size:.75rem}.ds-facts dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Pollutant Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Signature reading card: value, 24 h chart with dashed mean and sub-index-coloured latest bar, and WHO/UE norm meters with the limit fixed at 50%.",
+      "html": "<article class=\"ds-pc\"><header><h3><span class=\"ds-code\">PM10</span><span class=\"ds-name\">pył zawieszony PM10</span></h3><span class=\"ds-badge\" data-level=\"4\">Zły</span></header><p class=\"ds-value\"><span class=\"ds-num\">132</span><span class=\"ds-unit\">µg/m³</span></p><p class=\"ds-time\">ostatni pomiar: dziś, 01:00</p><figure class=\"ds-chart\"><svg viewBox=\"0 0 240 64\" preserveAspectRatio=\"none\" data-level=\"4\"><rect class=\"\" x=\"1\" y=\"46\" width=\"8\" height=\"18\"/><rect class=\"\" x=\"11\" y=\"48\" width=\"8\" height=\"16\"/><rect class=\"\" x=\"21\" y=\"50\" width=\"8\" height=\"14\"/><rect class=\"\" x=\"31\" y=\"52\" width=\"8\" height=\"12\"/><rect class=\"\" x=\"41\" y=\"52\" width=\"8\" height=\"12\"/><rect class=\"\" x=\"51\" y=\"50\" width=\"8\" height=\"14\"/><rect class=\"\" x=\"61\" y=\"44\" width=\"8\" height=\"20\"/><rect class=\"\" x=\"71\" y=\"40\" width=\"8\" height=\"24\"/><rect class=\"\" x=\"81\" y=\"38\" width=\"8\" height=\"26\"/><rect class=\"\" x=\"91\" y=\"42\" width=\"8\" height=\"22\"/><rect class=\"\" x=\"101\" y=\"44\" width=\"8\" height=\"20\"/><rect class=\"\" x=\"111\" y=\"42\" width=\"8\" height=\"22\"/><rect class=\"\" x=\"121\" y=\"38\" width=\"8\" height=\"26\"/><rect class=\"\" x=\"131\" y=\"36\" width=\"8\" height=\"28\"/><rect class=\"\" x=\"141\" y=\"34\" width=\"8\" height=\"30\"/><rect class=\"\" x=\"151\" y=\"32\" width=\"8\" height=\"32\"/><rect class=\"\" x=\"161\" y=\"28\" width=\"8\" height=\"36\"/><rect class=\"\" x=\"171\" y=\"26\" width=\"8\" height=\"38\"/><rect class=\"\" x=\"181\" y=\"24\" width=\"8\" height=\"40\"/><rect class=\"\" x=\"191\" y=\"20\" width=\"8\" height=\"44\"/><rect class=\"\" x=\"201\" y=\"16\" width=\"8\" height=\"48\"/><rect class=\"\" x=\"211\" y=\"12\" width=\"8\" height=\"52\"/><rect class=\"\" x=\"221\" y=\"6\" width=\"8\" height=\"58\"/><rect class=\"is-latest\" x=\"231\" y=\"0\" width=\"8\" height=\"64\"/><line class=\"ds-mean\" x1=\"0\" x2=\"240\" y1=\"34\" y2=\"34\"/></svg><figcaption><span>02:00</span><span class=\"ds-readout\">średnia z doby: 60 µg/m³</span><span>01:00</span></figcaption></figure><ul class=\"ds-norms\"><li data-status=\"above\"><div class=\"ds-nh\"><span class=\"ds-nt\">WHO · wytyczna dobowa</span><span class=\"ds-nf\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10.3 4.6 3.2 17a2 2 0 0 0 1.7 3h14.2a2 2 0 0 0 1.7-3L13.7 4.6a2 2 0 0 0-3.4 0Z\"/><path d=\"M12 9.5v4\"/><path d=\"M12 16.8h.01\"/></svg>1,3× normy</span></div><div class=\"ds-meter\"><span class=\"ds-within\" style=\"flex-basis:50%\"></span><span class=\"ds-above\" style=\"flex-basis:17%\"></span><span class=\"ds-limit\"></span></div><span class=\"ds-basis\">średnia z 24 h: 60 z 45 µg/m³</span></li><li data-status=\"within\"><div class=\"ds-nh\"><span class=\"ds-nt\">UE · norma godzinowa</span><span class=\"ds-nf\">36% normy</span></div><div class=\"ds-meter\"><span class=\"ds-within\" style=\"flex-basis:18%\"></span><span class=\"ds-limit\"></span></div><span class=\"ds-basis\">najwyższa średnia 8 h z doby: 36 z 100 µg/m³</span></li></ul></article>",
+      "css": ":host{--ground:#f3f5f8;--surface:#fff;--surface-2:#f7f9fb;--ink:#111827;--ink-2:#4b5563;--ink-3:#5f6b7a;--line:#e3e8ee;--line-strong:#cdd5df;--accent:#0b6fb8;--accent-strong:#095a96;--accent-soft:#e8f2fb;--danger:#b42318;--bar:#c4cdd8;--lvl-0:#57b108;--lvl-1:#b0dd10;--lvl-2:#ffd911;--lvl-3:#e58100;--lvl-4:#e50000;--lvl-5:#990000;--lvl-none:#e4e8ed;--radius:8px;--radius-lg:12px;--shadow:0 1px 2px rgb(17 24 39 / .05),0 6px 16px -6px rgb(17 24 39 / .08);--font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-family:var(--font);color:var(--ink)} [data-level]{--lvl:var(--lvl-none);--lvl-ink:var(--ink)}[data-level='0']{--lvl:var(--lvl-0)}[data-level='1']{--lvl:var(--lvl-1)}[data-level='2']{--lvl:var(--lvl-2)}[data-level='3']{--lvl:var(--lvl-3)}[data-level='4']{--lvl:var(--lvl-4);--lvl-ink:#fff}[data-level='5']{--lvl:var(--lvl-5);--lvl-ink:#fff}[data-level='none']{--lvl-ink:var(--ink-2)} .ds-badge{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--lvl);color:var(--lvl-ink);font-size:.875rem;font-weight:600;line-height:1;white-space:nowrap;box-shadow:inset 0 0 0 1px rgb(17 24 39 / .07)} .ds-pc{display:flex;flex-direction:column;gap:4px;max-width:400px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}.ds-pc header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}.ds-pc h3{display:grid;gap:2px;margin:0}.ds-code{font-size:1.2rem;font-weight:700}.ds-name{font-size:.875rem;font-weight:400;color:var(--ink-2)}.ds-value{display:flex;align-items:baseline;gap:6px;margin:0}.ds-num{font-size:2.074rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}.ds-unit{font-size:.875rem;color:var(--ink-2)}.ds-time{margin:0;font-size:.875rem;color:var(--ink-3)}.ds-chart{margin:16px 0 4px}.ds-chart svg{display:block;width:100%;height:64px}.ds-chart rect{fill:var(--bar);transition:fill 120ms ease-out}.ds-chart rect:hover{fill:var(--accent)}.ds-chart svg[data-level] .is-latest{fill:var(--lvl);stroke:rgb(17 24 39 / .45);stroke-width:1;vector-effect:non-scaling-stroke}.ds-mean{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}.ds-chart figcaption{display:grid;grid-template-columns:auto 1fr auto;gap:8px;margin-top:6px;font-size:.75rem;color:var(--ink-3);font-variant-numeric:tabular-nums}.ds-readout{text-align:center;color:var(--accent-strong)}.ds-norms{display:grid;gap:14px;margin:0;padding:14px 0 0;list-style:none;border-top:1px solid var(--line)}.ds-norms li{display:grid;gap:6px;font-size:.875rem}.ds-nh{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.ds-nt{color:var(--ink-2)}.ds-nf{display:inline-flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap}[data-status='above'] .ds-nf{color:var(--danger)}.ds-meter{position:relative;display:flex;height:6px;border-radius:999px;background:var(--line)}.ds-within{background:#7d8fa4;border-radius:999px 0 0 999px}[data-status='within'] .ds-within{border-radius:999px}.ds-above{background:var(--danger);border-radius:0 999px 999px 0}.ds-limit{position:absolute;top:-4px;bottom:-4px;left:calc(50% - 1px);width:2px;border-radius:1px;background:var(--ink)}.ds-basis{font-size:.75rem;color:var(--ink-3);font-variant-numeric:tabular-nums}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Straight Reading",
+    "overview": "MyAir is the category standard for air-quality apps, played straight and finished to the level of Airly, IQAir AirVisual and Apple Weather's air-quality module. The answer comes first (\"Zły, decyduje PM10\"), the evidence follows, and every claim names its source: GIOŚ, WHO or the EU. The world is a cool light-grey ground with white working cards, near-black ink and one blue accent. The only other hues in the system are the six official colours of the Polski Indeks Jakości Powietrza, so any colour that isn't the accent is the air speaking.\n\nThe screen gets louder as the air gets worse. Good air is a calm white card with a coloured disc. Level 3 (dostateczny) tints the card warm. At levels 4 and 5 the hero and the voivodeship verdict fill with the index colour, the disc and badges invert to white, and on phones the browser bar takes the colour too. The density is that of a working tool: tabular figures, small captions, hairline rules, and nothing decorative between the visitor and the reading.\n\nThe system rejects the bare list of raw numbers it replaced, and it rejects red/green verdicts that don't name a source. It does not tint, gradient or reinterpret GIOŚ's legend colours.",
+    "keyCharacteristics": [
+      "A cool grey ground with white cards, one blue accent, and GIOŚ's six index colours as the only state hues.",
+      "Loudness tracks the index: calm at 0–2, tinted at 3, flooded at 4–5.",
+      "System UI sans, no webfont, tabular figures for every number.",
+      "Gently rounded shapes: 8px on controls, 12px on cards, pills for index badges, a full circle for the index disc.",
+      "Hairline borders and one soft ambient shadow. Depth comes from the white surface sitting on grey.",
+      "Authored line icons on a 24-unit grid with a 1.75 stroke, always decorative."
+    ],
+    "rules": [
+      {
+        "name": "The Air Owns the Colour Rule",
+        "body": "Apart from wind-line blue, every chromatic hue on screen is a GIOŚ index level. Never use green, yellow, orange or red decoratively, for success states or for branding.",
+        "section": "colors"
+      },
+      {
+        "name": "The Legend Is Verbatim Rule",
+        "body": "The six index fills are GIOŚ's hexes, exactly. Text on them is chosen for contrast and not copied from GIOŚ: ink on levels 0–3 and white on levels 4–5. GIOŚ's white-on-green fails contrast, so it is not used.",
+        "section": "colors"
+      },
+      {
+        "name": "The Volume Rule",
+        "body": "How loud a surface is depends on the index level and nothing else. Levels 0–2: a white card, with colour only in the disc or badge. Level 3: the card takes warn-tint and warn-line. Levels 4–5: the card fills with the level colour, the text turns white, and the disc and badges invert to white with the level colour as text. On phones the browser theme-color follows. The change runs as a 200ms ease-out colour transition.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Figures Rule",
+        "body": "Every number and time is set with `font-variant-numeric: tabular-nums`: values, counts, hours and ratios. Columns of readings must not shimmer as they update.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Webfont Rule",
+        "body": "Only the system UI stack. No Google Fonts and no display face; weight and size carry the hierarchy.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Ambient Shadow Rule",
+        "body": "Resting cards all share the single card shadow. Don't add hover lifts, and don't add stronger shadows to make a card important. Importance comes from the index colour.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** take index colour only from lvl-0 … lvl-5 and lvl-none, set through `data-level`, which provides both `--lvl` and `--lvl-ink`.",
+      "**Do** put ink text on levels 0–3 and white on levels 4–5, everywhere a level colour is a fill.",
+      "**Do** follow the Volume Rule on any surface that states a verdict: white at 0–2, warn-tint at 3, a full flood with inverted disc and badges at 4–5, over a 200ms ease-out transition.",
+      "**Do** name the source next to every verdict or norm (GIOŚ, WHO 2021, UE) and compare norms only over their own averaging period.",
+      "**Do** set every number and time in tabular figures.",
+      "**Do** use 8px radii on controls and 12px on cards, with the hairline border and the single card shadow.",
+      "**Do** keep the norm limit tick at 50% of a track that spans twice the norm.",
+      "**Do** colour only the latest chart bar by the GIOŚ sub-index, and only when the sub-index hour matches the bar.",
+      "**Do** use 150ms ease-out for hover and press transitions."
+    ],
+    "donts": [
+      "**Don't** use a GIOŚ index colour for anything that is not an index level: no green success, no red buttons, no coloured decoration.",
+      "**Don't** copy GIOŚ's white text on green or orange fills. It fails contrast.",
+      "**Don't** load a webfont or add a second type family.",
+      "**Don't** colour the map by index, or tint whole pages. Loudness lives on the verdict cards.",
+      "**Don't** show a verdict without a source, or a bare value without its unit and hour.",
+      "**Don't** add hover lifts or heavier shadows to cards for emphasis.",
+      "**Don't** use icon fonts or packaged icon sets. Draw icons on the 24-unit grid with a 1.75 stroke."
+    ]
+  }
+}

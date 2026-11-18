@@ -1,22 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
-import { Station } from '../models/air-quality';
+import { AirIndex, Station } from '../models/air-quality';
 import { VoivodeshipService } from '../voivodeship.service';
 import { VoivodeshipComponent } from './voivodeship.component';
 
 const STATIONS: Station[] = [
   { id: 2, name: 'B', city: 'Wrocław', street: 'ul. B', province: 'DOLNOŚLĄSKIE' },
   { id: 1, name: 'A', city: 'Legnica', street: null, province: 'DOLNOŚLĄSKIE' },
+  { id: 4, name: 'D', city: 'Zgorzelec', street: 'ul. D', province: 'DOLNOŚLĄSKIE' },
   { id: 3, name: 'C', city: 'Kraków', street: 'ul. C', province: 'MAŁOPOLSKIE' },
 ];
 
+function index(stationId: number, level: AirIndex['level']): AirIndex {
+  return { stationId, level, calculatedAt: null, sourceDate: null, critical: null, pollutants: {} };
+}
+
 describe('VoivodeshipComponent', () => {
   let fixture: ComponentFixture<VoivodeshipComponent>;
-  let service: Partial<VoivodeshipService>;
 
-  async function render(id: string) {
+  async function render(id: string, service: Partial<VoivodeshipService>) {
     await TestBed.configureTestingModule({
       imports: [VoivodeshipComponent],
       providers: [provideRouter([]), { provide: VoivodeshipService, useValue: service }],
@@ -27,47 +31,47 @@ describe('VoivodeshipComponent', () => {
     return fixture.nativeElement as HTMLElement;
   }
 
-  it('lists stations of the voivodeship, sorted by city', async () => {
-    service = { getStations: () => of(STATIONS) };
-    const el = await render('10'); // Dolnośląskie
-    const stations = Array.from(el.querySelectorAll('.station')).map((s) => s.textContent);
-    expect(stations.length).toBe(2);
-    expect(stations[0]).toContain('Legnica');
-    expect(stations[1]).toContain('Wrocław');
+  const indexes = (): Observable<ReadonlyMap<number, AirIndex | 'error'>> =>
+    of(
+      new Map<number, AirIndex | 'error'>([
+        [1, index(1, 0)],
+        [2, index(2, 4)],
+        [4, 'error'],
+      ]),
+    );
+
+  it('lists stations of the voivodeship A–Z with their GIOŚ index', async () => {
+    const el = await render('10', { getStations: () => of(STATIONS), getIndexes: indexes });
+    const rows = Array.from(el.querySelectorAll('a.station'));
+    expect(rows.map((r) => r.querySelector('.city')?.textContent)).toEqual([
+      'Legnica',
+      'Wrocław',
+      'Zgorzelec',
+    ]);
+    expect(rows[0].getAttribute('href')).toBe('/stacja/1');
+    expect(rows[0].textContent).toContain('Bardzo dobry');
+    expect(rows[1].textContent).toContain('Zły');
+    expect(rows[2].textContent).toContain('Brak danych');
+  });
+
+  it('sorts the worst stations first on request', async () => {
+    const el = await render('10', { getStations: () => of(STATIONS), getIndexes: indexes });
+    const worstFirst = el.querySelectorAll<HTMLButtonElement>('.segmented button')[1];
+    worstFirst.click();
+    await fixture.whenStable();
+    expect(worstFirst.getAttribute('aria-pressed')).toBe('true');
+    const cities = Array.from(el.querySelectorAll('a.station .city')).map((c) => c.textContent);
+    expect(cities).toEqual(['Wrocław', 'Legnica', 'Zgorzelec']);
   });
 
   it('shows an error with a retry button when the API fails', async () => {
-    service = { getStations: () => throwError(() => new Error('504')) };
-    const el = await render('10');
+    const el = await render('10', { getStations: () => throwError(() => new Error('504')) });
     expect(el.querySelector('[role="alert"]')?.textContent).toContain('Nie udało się pobrać');
     expect(el.querySelector('[role="alert"] button')).toBeTruthy();
   });
 
-  it('shows sensor readings, including sensors without current data', async () => {
-    service = {
-      getStations: () => of(STATIONS),
-      getSensors: () =>
-        of([
-          { id: 10, stationId: 1, paramName: 'dwutlenek azotu', paramCode: 'NO2' },
-          { id: 11, stationId: 1, paramName: 'arsen w PM10', paramCode: 'As(PM10)' },
-        ]),
-      getLatestReading: (id: number) =>
-        of(id === 10 ? { date: '2026-11-17 20:00:00', value: 15.4 } : null),
-    };
-    const el = await render('10');
-    (el.querySelector('.station') as HTMLButtonElement).click();
-    await fixture.whenStable();
-
-    const sensors = Array.from(el.querySelectorAll('.sensor')).map((s) => s.textContent ?? '');
-    expect(sensors.length).toBe(2);
-    expect(sensors[0]).toContain('NO2');
-    expect(sensors[0]).toContain('15.4');
-    expect(sensors[1]).toContain('brak bieżących danych');
-  });
-
   it('handles an unknown voivodeship id', async () => {
-    service = { getStations: () => of(STATIONS) };
-    const el = await render('99');
+    const el = await render('99', { getStations: () => of(STATIONS) });
     expect(el.textContent).toContain('Nie ma takiego województwa');
   });
 });

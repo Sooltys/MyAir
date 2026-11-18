@@ -1,0 +1,106 @@
+@if (voivodeship(); as voivodeship) {
+  <nav class="crumbs" aria-label="Jesteś tutaj">
+    <a routerLink="/">Polska</a>
+    <app-icon name="chevron-right" [size]="14" />
+    <span aria-current="page">{{ voivodeship.name }}</span>
+  </nav>
+
+  <h1>{{ voivodeship.name }}</h1>
+  <p class="lead">
+    @if (voivodeshipStations().length > 0) {
+      <span class="num">{{ voivodeshipStations().length }}</span>
+      {{ stationsWord(voivodeshipStations().length) }} pomiarowych GIOŚ
+      @if (dataTime(); as time) {
+        · indeks GIOŚ: <time>{{ time }}</time>
+      }
+    } @else {
+      Stacje pomiarowe GIOŚ w województwie {{ locative() }}
+    }
+  </p>
+
+  @if (indexes.isLoading() || (!indexes.hasValue() && !indexes.error())) {
+    <section class="verdict card" aria-busy="true">
+      <span class="skeleton" style="width: 220px; height: 28px"></span>
+      <span class="skeleton" style="width: 300px; height: 18px"></span>
+    </section>
+  } @else if (indexes.error()) {
+    <section class="verdict card notice" role="alert">
+      <p>Nie udało się pobrać indeksów jakości powietrza z GIOŚ.</p>
+      <button class="btn" type="button" (click)="indexes.reload()">
+        <app-icon name="refresh" [size]="18" />
+        Spróbuj ponownie
+      </button>
+    </section>
+  } @else {
+    <section
+      class="verdict card"
+      [attr.data-level]="worstLevel() ?? 'none'"
+      [class.is-warn]="worstLevel() === 3"
+      [class.is-alarm]="(worstLevel() ?? 0) >= 4"
+      aria-labelledby="verdict-title"
+    >
+      @if (worstLevel() !== null) {
+        <h2 id="verdict-title">
+          Najgorszy indeks w województwie
+          <app-index-badge [level]="worstLevel()" />
+        </h2>
+        <p>
+          @if (worstLevel() === 0) {
+            @if (withIndex() === 1) {
+              Na jedynej stacji z indeksem powietrze jest bardzo dobre.
+            } @else {
+              Na wszystkich <span class="num">{{ withIndex() }}</span> stacjach z indeksem powietrze
+              jest bardzo dobre.
+            }
+          } @else {
+            @for (station of worstStations().slice(0, 3); track station.id; let last = $last) {
+              <a [routerLink]="['stacja', station.id]"
+                >{{ station.city }}{{ station.street ? ', ' + station.street : '' }}</a
+              >{{ last ? '' : ', ' }}
+            }
+            @if (worstStations().length > 3) {
+              i jeszcze <span class="num">{{ worstStations().length - 3 }}</span>
+            }
+          }
+        </p>
+      } @else {
+        <h2 id="verdict-title">Brak indeksu na stacjach województwa</h2>
+        <p>
+          GIOŚ nie policzył teraz indeksu dla żadnej stacji. Odczyty znajdziesz na stronach stacji.
+        </p>
+      }
+    </section>
+
+    <section class="distribution card" aria-labelledby="distribution-title">
+      <h2 id="distribution-title">Indeks na stacjach</h2>
+      <div class="bar" role="img" [attr.aria-label]="distributionLabel()">
+        @for (row of distribution(); track row.key) {
+          @if (row.count > 0) {
+            <span class="segment" [attr.data-level]="row.key" [style.flex-grow]="row.count"></span>
+          }
+        }
+      </div>
+      <ul class="plain legend">
+        @for (row of distribution(); track row.key) {
+          <li [class.is-zero]="row.count === 0" [attr.data-level]="row.key">
+            <span class="swatch"></span>
+            <span class="name">{{ row.name }}</span>
+            <span class="num">{{ row.count }}</span>
+          </li>
+        }
+      </ul>
+      @if (failed() > 0) {
+        <p class="note">
+          Nie udało się pobrać indeksu dla <span class="num">{{ failed() }}</span>
+          {{ stationsWord(failed()) }}.
+        </p>
+      }
+      <p class="note">
+        <strong>Brak indeksu</strong> oznacza, według GIOŚ, że stacja nie mierzy zanieczyszczenia,
+        które w danym czasie decyduje o jakości powietrza w województwie.
+      </p>
+    </section>
+
+    <p class="hint">Wybierz stację, żeby zobaczyć jej odczyty i porównanie z normami WHO i UE.</p>
+  }
+}
