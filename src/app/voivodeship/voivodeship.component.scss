@@ -1,33 +1,56 @@
+:host {
+  display: block;
+  text-align: center;
+}
+
 h2 {
-    margin: 20px;
+  margin: 20px;
 }
-p{
-    font-size: 15px;
+
+a[matMiniFab],
+button[matButton] {
+  margin: 15px;
 }
-button {
-    margin: 15px;
+
+.stations,
+.sensor-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.stations {
-    text-align: center;
+
+.station {
+  width: 200px;
+  margin: 8px 0;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(127, 255, 212, 0.616);
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+  cursor: pointer;
 }
-.stations p {
-    padding: 5px;
-    background-color: rgba(127, 255, 212, 0.616); 
-    width:  200px; 
-    border-radius: 10px;
-    cursor: pointer;
+
+.sensor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 160px;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: rgba(0, 255, 255, 0.726);
+  font-size: 15px;
 }
-.sensors p {
-    background-color: rgba(0, 255, 255, 0.726);
-    width:  100px;
-    height: 65px;
-    border-radius: 20px;
-    text-align: center;
-    cursor: pointer;
+
+.sensor .date {
+  font-size: 12px;
 }
-.data p{
-    background-color:rgba(33, 240, 43, 0.753);
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 20px;
+
+.status,
+.error {
+  margin: 20px;
 }

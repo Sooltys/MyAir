@@ -1,4 +1,4 @@
-import { Voivodeship } from './voivodeship'
+import { Voivodeship } from '../models/voivodeship';
 
 export const Voivodeships: Voivodeship[] = [
     { id: 1, name: 'Zachodniopomorskie' },

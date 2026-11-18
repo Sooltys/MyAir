@@ -1,14 +1,16 @@
 <mat-toolbar color="primary">
-    <img src="../../assets/favicon.png" alt="icon" width="32px" height="32px"/>
-    <span id="title" >My Air</span>
-    <span class="example-spacer"></span>
-    <button mat-raised-button [matMenuTriggerFor]="menu" >{{ activeVoivodeship }}</button>
-    <mat-menu #menu="matMenu">
-        <div *ngFor="let voivodeship of voivodeships ">
-            <button routerLink="/wojewodztwo/{{voivodeship.id}}" mat-menu-item>{{ voivodeship.name }}</button>
-        </div>
-    </mat-menu>
-    <a  href="http://jakubpuzyna.pl" target="_blank">
-        <button mat-raised-button color="accent">Autor</button>
-    </a>
-  </mat-toolbar>
+  <a routerLink="/" class="brand">
+    <img src="/favicon.png" alt="" width="32" height="32" />
+    <span>My Air</span>
+  </a>
+  <span class="spacer"></span>
+  <button matButton="elevated" [matMenuTriggerFor]="menu">Województwa</button>
+  <mat-menu #menu="matMenu">
+    @for (voivodeship of voivodeships; track voivodeship.id) {
+      <a mat-menu-item [routerLink]="['/wojewodztwo', voivodeship.id]">{{ voivodeship.name }}</a>
+    }
+  </mat-menu>
+  <a matButton="elevated" color="accent" href="https://puzyna.pl" target="_blank" rel="noopener">
+    Autor
+  </a>
+</mat-toolbar>

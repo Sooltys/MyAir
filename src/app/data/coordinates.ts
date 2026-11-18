@@ -1,9 +1,9 @@
-import { Coordinate } from "./coordinate";
+import { Coordinate } from '../models/coordinate';
 
 export const Coordinates: Coordinate[] = [
     {
         
-        device: '/map.jpg',
+        image: '/map.jpg',
         cords: [
         "16,85,16,101,1,200,23,227,154,177,191,115,213,43",
         "222,44,199,114,226,127,234,119,347,124,349,49,360,42,357,24,323,1",
@@ -25,7 +25,7 @@ export const Coordinates: Coordinate[] = [
     
     },
     {
-        device: 'mobilemap.jpg',
+        image: '/mobilemap.jpg',
         cords: [
             "9,38,0,90,10,102,70,79,85,53,96,19",
             "100,20,90,49,100,59,105,52,154,54,157,21,164,17,162,10,146,1",

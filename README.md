@@ -1,27 +1,58 @@
 # MyAir
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+Bieżąca jakość powietrza ze stacji pomiarowych GIOŚ: mapa województw → lista stacji → najnowsze
+odczyty wszystkich stanowisk stacji.
 
-## Development server
+Angular 22 (standalone, zoneless, Angular Material), hosting na Cloudflare Pages.
+Źródło danych: [Główny Inspektorat Ochrony Środowiska](https://powietrze.gios.gov.pl), API v1.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Wymagania
 
-## Code scaffolding
+Node.js w wersji z [.nvmrc](.nvmrc) (`nvm use`).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Jak to działa
 
-## Build
+API GIOŚ wpuszcza przez CORS tylko własną domenę, więc przeglądarka woła wyłącznie `/api/...`
+(stała `API_BASE_URL` w [src/app/api.config.ts](src/app/api.config.ts)), a dalej przekazuje to:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+| Środowisko | Co obsługuje `/api/*` |
+| --- | --- |
+| `npm start` (`ng serve`) | [proxy.conf.json](proxy.conf.json) |
+| Cloudflare Pages / `npm run preview` | Pages Function [functions/api/[[path]].js](functions/api/[[path]].js) |
 
-## Running unit tests
+Pages Function:
+- przyjmuje tylko GET/HEAD (inne → 405) i dokleja ścieżkę oraz query do
+  `https://api.gios.gov.pl/pjp-api/v1/rest/`; nie da się nią wyjść poza ten adres (→ 400),
+- trzyma odpowiedzi w Cache API przez 10 minut (nagłówek `X-Proxy-Cache: HIT|MISS`),
+- po 10 s bez odpowiedzi GIOŚ zwraca 504, przy błędzie połączenia 502 (krótki JSON),
+- przepuszcza status i `Content-Type`, bez `Set-Cookie` i `Access-Control-Allow-Origin`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Nagłówki plików statycznych (cache, bezpieczeństwo) są w [public/_headers](public/_headers).
+Brak `404.html` w wyniku builda włącza na Pages tryb SPA (każda nieznana ścieżka → `index.html`).
 
-## Running end-to-end tests
+## Komendy
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+| Komenda | Opis |
+| --- | --- |
+| `npm start` | dev server na http://localhost:4200 z proxy do GIOŚ |
+| `npm run build` | build produkcyjny do `dist/my-air/browser` |
+| `npm test` | testy jednostkowe Angulara (Vitest) |
+| `npm run test:functions` | testy Pages Function (`node --test`) |
+| `npm run preview` | build + `wrangler pages dev` na http://localhost:8788 (jak na Pages, z proxy) |
 
-## Further help
+## Deploy (Cloudflare Pages)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Adres produkcyjny: https://myair.puzyna.pl/ (link z portfolio https://puzyna.pl).
+
+Projekt Pages zakładamy przez **Workers & Pages → Create → „Looking to deploy Pages? Get started”
+→ Import an existing Git repository** (nie formularz Workers z `npx wrangler deploy`).
+Pages buduje projekt z GitHuba po każdym pushu:
+
+- production branch: `master` (inne gałęzie dostają podgląd na `*.pages.dev`),
+- framework preset: **None**,
+- build command: `npm run build`,
+- build output directory: `dist/my-air/browser`,
+- wersja Node z `.nvmrc` (zmienna `NODE_VERSION` nie jest potrzebna).
+
+Domena: projekt → **Custom domains → Set up a custom domain** → `myair.puzyna.pl`. Strefa
+`puzyna.pl` jest w tym samym koncie Cloudflare, więc rekord CNAME Pages dodaje sam.
