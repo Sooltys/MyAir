@@ -35,7 +35,7 @@ MyAir presents official data plainly. It shows GIOŚ's measurements exactly as p
 ## Operating Context
 
 - Public, anonymous, Polish-language website at https://myair.puzyna.pl/, with no accounts.
-- Visitors arrive directly or from the portfolio. The header's "Autor" button links to https://puzyna.pl, and the footer credit reads "Zrobione z ♥ przez puzyna.pl".
+- Visitors arrive directly or from the portfolio. The header's "Autor" button links to https://puzyna.pl, and the footer credit reads "Made with ♥ by puzyna.pl".
 - GIOŚ publishes hourly measurements. The most recent hours are often still empty. Manual stations have no current data at all. The GIOŚ API is sometimes slow or down.
 - The browser only ever calls `/api/*`. A Cloudflare Pages Function proxies those calls to GIOŚ API v1 (`https://api.gios.gov.pl/pjp-api/v1/rest/`) and caches responses for 10 minutes. GIOŚ's CORS policy only admits its own domain, so the browser cannot call GIOŚ directly.
 
@@ -89,7 +89,7 @@ MyAir presents official data plainly. It shows GIOŚ's measurements exactly as p
 
 - Name: **My Air**, used in the header and the page title ("My Air – bieżąca jakość powietrza w Polsce"). The mark is `public/favicon.png`.
 - Data attribution: the footer credits GIOŚ and links to https://powietrze.gios.gov.pl.
-- Ties to the portfolio: the header's "Autor" link stays, and so does the footer credit "Zrobione z ♥ przez puzyna.pl" (heart as an icon, link on "puzyna.pl"). There is no "Wróć do portfolio" wording (owner's request, 2026-11-18).
+- Ties to the portfolio: the header's "Autor" link stays, and so does the footer credit **"Made with ♥ by puzyna.pl"**: heart as an icon, link on "puzyna.pl", marked `lang="en"`. It is the one deliberate English line on a Polish-only site, an author's signature rather than UI copy; the owner chose it over the calque "Zrobione z ♥ przez" (2026-11-18). There is no "Wróć do portfolio" wording.
 - Voice in the current copy: plain Polish, informal second person ("Spróbuj ponownie za chwilę"), short and factual status messages.
 - **Visual direction: the category standard, played straight** (chosen by the owner on 2026-11-18 over more expressive directions). MyAir should look and behave like a well-made air-quality app, with familiar conventions and no novelty for its own sake. The bar is the craft of **Airly, IQAir AirVisual and the air-quality module in Apple Weather**: their finish, legibility and phone behaviour, not their layouts or branding.
 - Index colours follow GIOŚ's official scale (as on powietrze.gios.gov.pl), so the app reads like the official source. Text on those fills must still meet contrast requirements.
