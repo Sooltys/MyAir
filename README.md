@@ -38,21 +38,4 @@ Brak `404.html` w wyniku builda włącza na Pages tryb SPA (każda nieznana ści
 | `npm run build` | build produkcyjny do `dist/my-air/browser` |
 | `npm test` | testy jednostkowe Angulara (Vitest) |
 | `npm run test:functions` | testy Pages Function (`node --test`) |
-| `npm run preview` | build + `wrangler pages dev` na http://localhost:8788 (jak na Pages, z proxy) |
-
-## Deploy (Cloudflare Pages)
-
-Adres produkcyjny: https://myair.puzyna.pl/ (link z portfolio https://puzyna.pl).
-
-Projekt Pages zakładamy przez **Workers & Pages → Create → „Looking to deploy Pages? Get started”
-→ Import an existing Git repository** (nie formularz Workers z `npx wrangler deploy`).
-Pages buduje projekt z GitHuba po każdym pushu:
-
-- production branch: `master` (inne gałęzie dostają podgląd na `*.pages.dev`),
-- framework preset: **None**,
-- build command: `npm run build`,
-- build output directory: `dist/my-air/browser`,
-- wersja Node z `.nvmrc` (zmienna `NODE_VERSION` nie jest potrzebna).
-
-Domena: projekt → **Custom domains → Set up a custom domain** → `myair.puzyna.pl`. Strefa
-`puzyna.pl` jest w tym samym koncie Cloudflare, więc rekord CNAME Pages dodaje sam.
+| `npm run preview` | build + `wrangler pages dev` na http://localhost:8788 |
